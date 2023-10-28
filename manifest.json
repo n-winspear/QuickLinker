@@ -1,10 +1,13 @@
 {
     "manifest_version": 3,
     "name": "Quick Linker",
-    "version": "1.3",
+    "version": "1.4",
     "description": "Redirects shortened keywords to websites.",
     "background": {
-        "service_worker": "src/service_workers/background.js"
+        "service_worker": [
+            "src/service_workers/background.js",
+            "src/service_workers/storage.js"
+        ]
     },
     "permissions": ["storage", "tabs"],
     "action": {
@@ -16,7 +19,13 @@
         }
     },
     "options_page": "src/options/options.html",
-
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["src/helpers/generateId.js", "src/components/Alias.js"],
+            "css": ["content.css"]
+        }
+    ],
     "icons": {
         "16": "src/icons/icon16.png",
         "48": "src/icons/icon48.png",
