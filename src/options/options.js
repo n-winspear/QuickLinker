@@ -1,55 +1,68 @@
-function Alias(keyword, url) {
-    return `
-    <li class="aliasItem">
-        <span class="aliasKeyword" data-keywordId="1">${keyword}</span>
-        <span class="aliasArrow">&#8594;</span>
-        <a class="aliasUrl" href="${url}" target="_blank"
-            >${url}
-        </a>
-        <div class="button removeBtn" role="button" data-keyword="${keyword}">
-            <i class="material-icons" style="font-size: 20px"
-                >delete</i
-            >
-        </div>
-    </li>`;
-}
-
-async function displayAliases() {
+addEventListeners = () => {
     try {
-        const items = await chrome.storage.sync.get(null);
-        const ul = document.getElementById('aliasItems');
-        let html = '';
-        for (let keyword in items.keywords) {
-            const li = Alias(keyword, items.keywords[keyword]);
-            html = html + li;
-        }
-        ul.innerHTML = html;
         Array.from(document.getElementsByClassName('removeBtn')).forEach(
             (button) => {
-                const keyword = button.getAttribute('data-keyword');
-                if (keyword) {
-                    button.addEventListener('click', () => {
-                        console.log('removing', keyword);
-                        chrome.runtime.sendMessage({
-                            action: 'removeKeyword',
-                            keyword: keyword,
-                        });
+                let id = button.getAttribute('data-id');
+                button.addEventListener('click', () => {
+                    chrome.runtime.sendMessage({
+                        action: 'removeAlias',
+                        id: id,
                     });
-                }
+                });
             }
         );
     } catch (error) {
         console.error(error);
     }
+};
+
+displayAliases = async () => {
+    try {
+        const result = await chrome.storage.sync.get('aliases');
+        const aliases = result.aliases || {};
+        const aliasesKeys = Object.keys(result.aliases);
+        const list = document.getElementById('aliasItems');
+
+        const html = aliasesKeys
+            .map((key) => Alias(key, aliases[key].keyword, aliases[key].url))
+            .join('');
+
+        list.innerHTML = html;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+removeAlias = async (id) => {
+    const listElements = Array.from(
+        document.getElementsByClassName('aliasItem')
+    );
+    listElements
+        .filter((element) => element.getAttribute('data-id') === id)
+        .remove();
+};
+
+async function displayAliases() {
+    try {
+    } catch (error) {
+        console.error(error);
+    }
 }
 
+// Response listener from background.js
 chrome.runtime.onMessage.addListener((message) => {
-    if (message.action === 'response') {
-        if (message.status === 'success') {
-            displayAliases();
-        } else {
-            console.error(message.error);
+    try {
+        const { action, status, error } = message;
+
+        switch (action) {
+            case 'response':
+                if (!status === 'success') throw new Error(error);
+
+            default:
+                throw new Error('Popup response listener action not defined');
         }
+    } catch (error) {
+        console.error(error);
     }
 });
 
