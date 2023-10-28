@@ -1,4 +1,4 @@
-Alias = (id, keyword, url) => {
+const Alias = (id, keyword, url) => {
     return `
         <li class="aliasItem" data-id="${id}">
             <span class="aliasKeyword" data-keywordId="1">${keyword}</span>

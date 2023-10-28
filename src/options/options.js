@@ -1,4 +1,4 @@
-addEventListeners = () => {
+const addEventListeners = () => {
     try {
         Array.from(document.getElementsByClassName('removeBtn')).forEach(
             (button) => {
@@ -16,7 +16,7 @@ addEventListeners = () => {
     }
 };
 
-displayAliases = async () => {
+const displayAliases = async () => {
     try {
         const result = await chrome.storage.sync.get('aliases');
         const aliases = result.aliases || {};
@@ -33,7 +33,7 @@ displayAliases = async () => {
     }
 };
 
-removeAlias = async (id) => {
+const removeAlias = async (id) => {
     const listElements = Array.from(
         document.getElementsByClassName('aliasItem')
     );
@@ -41,13 +41,6 @@ removeAlias = async (id) => {
         .filter((element) => element.getAttribute('data-id') === id)
         .remove();
 };
-
-async function displayAliases() {
-    try {
-    } catch (error) {
-        console.error(error);
-    }
-}
 
 // Response listener from background.js
 chrome.runtime.onMessage.addListener((message) => {

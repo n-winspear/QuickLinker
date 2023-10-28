@@ -1,9 +1,9 @@
-clearInputFields = () => {
+const clearInputFields = () => {
     document.getElementById('keyword').value = '';
     document.getElementById('url').value = '';
 };
 
-handleOptionsButtonClick = () => {
+const handleOptionsButtonClick = () => {
     try {
         chrome.runtime.openOptionsPage();
     } catch (error) {
@@ -11,7 +11,7 @@ handleOptionsButtonClick = () => {
     }
 };
 
-handleSaveButtonClick = async () => {
+const handleSaveButtonClick = async () => {
     try {
         const keyword = document.getElementById('keyword').value.trim();
         const url = document.getElementById('url').value.trim();

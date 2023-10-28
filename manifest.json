@@ -4,10 +4,8 @@
     "version": "1.4",
     "description": "Redirects shortened keywords to websites.",
     "background": {
-        "service_worker": [
-            "src/service_workers/background.js",
-            "src/service_workers/storage.js"
-        ]
+        "service_worker": "src/service_workers/background.js",
+        "type": "module"
     },
     "permissions": ["storage", "tabs"],
     "action": {
@@ -22,8 +20,11 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["src/helpers/generateId.js", "src/components/Alias.js"],
-            "css": ["content.css"]
+            "js": [
+                "src/helpers/generateId.js",
+                "src/components/Alias.js",
+                "src/service_workers/storage.js"
+            ]
         }
     ],
     "icons": {
