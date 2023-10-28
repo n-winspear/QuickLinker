@@ -1,31 +1,61 @@
-document.getElementById('optionsBtn').addEventListener('click', () => {
-    chrome.runtime.openOptionsPage();
-});
+clearInputFields = () => {
+    document.getElementById('keyword').value = '';
+    document.getElementById('url').value = '';
+};
 
-document.getElementById('saveBtn').addEventListener('click', async () => {
-    const keyword = document.getElementById('keyword').value.trim();
-    const url = document.getElementById('url').value.trim();
+handleOptionsButtonClick = () => {
+    try {
+        chrome.runtime.openOptionsPage();
+    } catch (error) {
+        console.error(error);
+    }
+};
 
-    if (keyword && validateURL(url)) {
+handleSaveButtonClick = async () => {
+    try {
+        const keyword = document.getElementById('keyword').value.trim();
+        const url = document.getElementById('url').value.trim();
+
+        if (!keyword || !url)
+            throw new Error('Please enter a valid keyword and URL');
+
+        const id = generateId();
+
         await chrome.runtime.sendMessage({
-            action: 'saveKeyword',
+            action: 'saveAlias',
+            id: id,
             keyword: keyword,
             url: url,
         });
 
-        document.getElementById('keyword').value = '';
-        document.getElementById('url').value = '';
-    } else {
-        alert('Please enter a valid keyword and URL.');
+        clearInputFields();
+    } catch (error) {
+        console.error(error);
     }
-});
+};
 
+// Event listeners
+document
+    .getElementById('optionsBtn')
+    .addEventListener('click', handleOptionsButtonClick);
+
+document
+    .getElementById('saveBtn')
+    .addEventListener('click', handleSaveButtonClick);
+
+// Response listener from background.js
 chrome.runtime.onMessage.addListener((message) => {
-    if (message.action === 'response') {
-        if (message.status === 'success') {
-            console.log('displaying');
-        } else {
-            console.error(message.error);
+    try {
+        const { action, status, error } = message;
+
+        switch (action) {
+            case 'response':
+                if (!status === 'success') throw new Error(error);
+
+            default:
+                throw new Error('Popup response listener action not defined');
         }
+    } catch (error) {
+        console.error(error);
     }
 });
