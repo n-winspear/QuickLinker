@@ -1,9 +1,16 @@
 // Listener for Omnibox (URL bar) events
 chrome.omnibox.onInputEntered.addListener(async (text) => {
     try {
-        const result = await chrome.storage.sync.get('keywords');
-        const url =
-            result.keywords[text] || `https://www.google.com/search?q=${text}`;
+        const result = await chrome.storage.sync.get('aliases');
+        const aliasesArray = Object.values(result.aliases);
+
+        const matchedAlias = aliasesArray.find(
+            (alias) => alias.keyword === text
+        );
+
+        const url = matchedAlias
+            ? matchedAlias.url
+            : `https://www.google.com/search?q=${text}`;
 
         await chrome.tabs.update({ url: url });
     } catch (error) {
