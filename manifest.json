@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "URL Alias V2",
-    "version": "1.2",
-    "description": "Redirects shortened keywords to associated websites.",
+    "name": "Quick Linker",
+    "version": "1.3",
+    "description": "Redirects shortened keywords to websites.",
     "background": {
         "service_worker": "src/service_workers/background.js"
     },
