@@ -1,0 +1,29 @@
+:root {
+    --bg-dark-navy: #111229;
+    --bg-dark-navy-darker: #0b0b1d;
+    --bg-dark-navy-lighter: #2b2b43;
+    --text-primary: #f7f7f7;
+    --text-secondary: #444444;
+    --primary-hot-pink: #ff5373;
+    --primary-hot-pink-darker: #c73850;
+    --primary-hot-pink-lighter: #ff708a;
+    --primary-light-blue: #73c2ff;
+    --primary-light-blue-darker: #4f8dc5;
+    --primary-light-blue-lighter: #8cd1ff;
+    --primary-gradient: linear-gradient(
+        to right,
+        var(--primary-light-blue),
+        var(--primary-hot-pink)
+    );
+    --primary-gradient-lighter: linear-gradient(
+        to right,
+        var(--primary-light-blue-lighter),
+        var(--primary-hot-pink-lighter)
+    );
+    --icon-white: #ffffff;
+    --primary-light-grey: #b0b0b0;
+    --primary-highlight-blue: #2c4dff;
+    --primary-highlight-red: #d22b2b;
+    --border-radius-base: 4px;
+    --popup-width: 300px;
+}

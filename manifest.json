@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "URL Alias V2",
+    "version": "1.2",
+    "description": "Redirects shortened keywords to associated websites.",
+    "background": {
+        "service_worker": "src/service_workers/background.js"
+    },
+    "permissions": ["storage", "tabs"],
+    "action": {
+        "default_popup": "src/popup/popup.html",
+        "default_icon": {
+            "16": "src/icons/icon16.png",
+            "48": "src/icons/icon48.png",
+            "128": "src/icons/icon128.png"
+        }
+    },
+    "options_page": "src/options/options.html",
+
+    "icons": {
+        "16": "src/icons/icon16.png",
+        "48": "src/icons/icon48.png",
+        "128": "src/icons/icon128.png"
+    },
+    "omnibox": { "keyword": "go" }
+}
