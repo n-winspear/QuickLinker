@@ -17,9 +17,14 @@ const handleSaveButtonClick = async () => {
     try {
         const keyword = document.getElementById('keyword').value.trim();
         const url = document.getElementById('url').value.trim();
+        const errorMessage = document.getElementById('errorMessage');
 
-        if (!keyword || !url)
-            throw new Error('Please enter a valid keyword and URL');
+        if (!keyword || !url) {
+            errorMessage.classList.add('showError');
+            return;
+        }
+
+        errorMessage.classList.remove('showError');
 
         const id = generateId();
 
@@ -33,6 +38,7 @@ const handleSaveButtonClick = async () => {
         clearInputFields();
     } catch (error) {
         console.error(error);
+        alert('Please enter a valid Keyword and URL');
     }
 };
 
@@ -44,6 +50,14 @@ document
 document
     .getElementById('saveBtn')
     .addEventListener('click', handleSaveButtonClick);
+
+document.getElementById('keyword').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') handleSaveButtonClick();
+});
+
+document.getElementById('url').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') handleSaveButtonClick();
+});
 
 // Response listener from background.js
 chrome.runtime.onMessage.addListener((message) => {
