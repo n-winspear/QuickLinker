@@ -51,12 +51,15 @@ chrome.runtime.onMessage.addListener((message) => {
         const { action, status, error } = message;
 
         switch (action) {
-            case 'response':
+            case 'saveAlias':
                 if (!status === 'success') throw new Error(error);
                 break;
 
             default:
-                throw new Error('Popup response listener action not defined');
+                throw new Error(
+                    'Popup response listener action not defined',
+                    action
+                );
         }
     } catch (error) {
         console.error(error);

@@ -1,9 +1,13 @@
+import Alias from '../components/Alias.js';
+
 const addEventListeners = () => {
     try {
-        Array.from(document.getElementsByClassName('removeBtn')).forEach(
-            (button) => {
-                let id = button.getAttribute('data-id');
-                button.addEventListener('click', () => {
+        Array.from(document.getElementsByClassName('aliasItem')).forEach(
+            (item) => {
+                let id = item.getAttribute('data-id');
+                let removeBtn = item.querySelector(':scope > .removeBtn');
+
+                removeBtn.addEventListener('click', () => {
                     chrome.runtime.sendMessage({
                         action: 'removeAlias',
                         id: id,
@@ -28,6 +32,7 @@ const displayAliases = async () => {
             .join('');
 
         list.innerHTML = html;
+        addEventListeners();
     } catch (error) {
         console.error(error);
     }
@@ -38,21 +43,26 @@ const removeAlias = async (id) => {
         document.getElementsByClassName('aliasItem')
     );
     listElements
-        .filter((element) => element.getAttribute('data-id') === id)
+        .filter((element) => element.getAttribute('data-id') === id)[0]
         .remove();
 };
 
 // Response listener from background.js
 chrome.runtime.onMessage.addListener((message) => {
     try {
-        const { action, status, error } = message;
+        const { action, status, error, id } = message;
 
         switch (action) {
-            case 'response':
+            case 'removeAlias':
                 if (!status === 'success') throw new Error(error);
+                removeAlias(id);
+                break;
 
             default:
-                throw new Error('Popup response listener action not defined');
+                throw new Error(
+                    'Options page response listener action not defined',
+                    action
+                );
         }
     } catch (error) {
         console.error(error);

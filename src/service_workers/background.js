@@ -35,8 +35,9 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
                     throw new Error('Error storing alias');
 
                 chrome.runtime.sendMessage({
-                    action: 'response',
+                    action: 'saveAlias',
                     status: 'success',
+                    id: id,
                 });
 
                 break;
@@ -49,8 +50,9 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
                     throw new Error('Error removing alias');
 
                 chrome.runtime.sendMessage({
-                    action: 'response',
+                    action: 'removeAlias',
                     status: 'success',
+                    id: id,
                 });
 
                 break;

@@ -6,7 +6,7 @@ const Alias = (id, keyword, url) => {
             <a class="aliasUrl" href="${url}" target="_blank"
                 >${url}
             </a>
-            <div class="button removeBtn" role="button" data-id="${id}">
+            <div class="button removeBtn" role="button">
                 <i class="material-icons" style="font-size: 20px"
                     >delete</i
                 >
