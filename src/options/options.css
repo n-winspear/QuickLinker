@@ -61,22 +61,6 @@ ul {
     border-color: var(--primary-light-blue-lighter);
 }
 
-.aliasItem:nth-child(odd) {
-    border-color: var(--primary-light-blue-darker);
-}
-
-.aliasItem:nth-child(odd):hover {
-    border-color: var(--primary-light-blue-lighter);
-}
-
-.aliasItem:nth-child(even) {
-    border-color: var(--primary-hot-pink-darker);
-}
-
-.aliasItem:nth-child(even):hover {
-    border-color: var(--primary-hot-pink-lighter);
-}
-
 .aliasKeyword,
 .aliasUrl,
 .removeBtn {

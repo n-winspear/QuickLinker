@@ -96,10 +96,20 @@ input[type='text']:focus {
     height: 36px;
     color: var(--text-primary);
     background-image: var(--primary-gradient);
-    border: 1px solid var();
     transition: 0.4s;
 }
 
 #saveBtn:hover {
     filter: brightness(120%);
+}
+
+.popupError {
+    display: none;
+    width: 100%;
+    padding: 0px 0px 4px 4px;
+    color: var(--primary-hot-pink);
+}
+
+.showError {
+    display: flex;
 }
