@@ -1,4 +1,4 @@
-const saveAlias = async (id, keyword, url) => {
+export const saveAlias = async (id, keyword, url) => {
     try {
         const result = await chrome.storage.sync.get('aliases');
         const aliases = result.aliases || {};
@@ -13,7 +13,7 @@ const saveAlias = async (id, keyword, url) => {
     }
 };
 
-const removeAlias = async (id) => {
+export const removeAlias = async (id) => {
     try {
         const result = await chrome.storage.sync.get('aliases');
         const aliases = result.aliases || {};

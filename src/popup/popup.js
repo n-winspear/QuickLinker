@@ -1,3 +1,5 @@
+import generateId from '../helpers/generateId.js';
+
 const clearInputFields = () => {
     document.getElementById('keyword').value = '';
     document.getElementById('url').value = '';
@@ -51,6 +53,7 @@ chrome.runtime.onMessage.addListener((message) => {
         switch (action) {
             case 'response':
                 if (!status === 'success') throw new Error(error);
+                break;
 
             default:
                 throw new Error('Popup response listener action not defined');

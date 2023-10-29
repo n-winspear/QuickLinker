@@ -1,4 +1,4 @@
-generateId = async () => {
+const generateId = () => {
     const CHARACTERS = '0123456789ABCDEF';
     const ID_LENGTH = 8;
 
@@ -8,3 +8,5 @@ generateId = async () => {
     }
     return id;
 };
+
+export default generateId;

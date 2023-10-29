@@ -13,3 +13,5 @@ const Alias = (id, keyword, url) => {
             </div>
         </li>`;
 };
+
+export default Alias;

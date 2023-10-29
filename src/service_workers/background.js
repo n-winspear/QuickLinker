@@ -1,3 +1,5 @@
+import { saveAlias, removeAlias } from './storage.js';
+
 // Listener for Omnibox (URL bar) events
 chrome.omnibox.onInputEntered.addListener(async (text) => {
     try {
@@ -41,7 +43,7 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
 
             // Removing Alias
             case 'removeAlias':
-                let storageResponse = await removeAlias(id);
+                storageResponse = await removeAlias(id);
 
                 if (storageResponse.status !== 'success')
                     throw new Error('Error removing alias');
