@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Quick Linker",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "As advertised, redirect shortened keywords to websites after the keyword go.",
     "background": {
         "service_worker": "src/service_workers/background.js",
