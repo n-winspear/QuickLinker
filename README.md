@@ -8,4 +8,4 @@ Keywords can be removed from the extension options page, accessed by clicking th
 
 Below is the Github repository if you would like to see what the extension is doing. Please note that I'm an not a professional developer and my code could use improving.
 
-If you have any feature or code suggestions (or you just want to say thanks) please pm me on Github :)
+If you have any feature or code suggestions please pm me on Github :)
