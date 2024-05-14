@@ -1,5 +1,5 @@
 const Alias = (id, keyword, url) => {
-    return `
+  return `
         <li class="aliasItem" data-id="${id}">
             <span class="aliasKeyword" data-keywordId="1">${keyword}</span>
             <span class="aliasArrow">&#8594;</span>
