@@ -1,105 +1,105 @@
 /* Content Styles */
 
 nav {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 80px;
-    padding: 0px 32px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80px;
+  padding: 0 32px;
 }
 
 #nav-title {
-    font-size: 30px;
-    font-family: 'Pacifico', cursive;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
+  font-size: 30px;
+  font-family: 'Pacifico', cursive;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 }
 
 #nav-logo {
-    height: 80px;
-    margin-left: auto;
-    border: none;
-    border-radius: calc(var(--border-radius-base) * 2);
+  height: 80px;
+  margin-left: auto;
+  border: none;
+  border-radius: calc(var(--border-radius-base) * 2);
 }
 
 .content {
-    padding: 16px 32px 0px 32px;
+  padding: 16px 32px 0 32px;
 }
 
 /* Divider */
 
 .divider {
-    display: flex;
-    height: 2px;
-    background-image: var(--primary-gradient);
+  display: flex;
+  height: 2px;
+  background-image: var(--primary-gradient);
 }
 
 /* List Items */
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 .aliasItem {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: var(--bg-dark-navy-lighter);
-    margin: 8px 0px;
-    padding: 12px 20px;
-    border: 2px solid var(--primary-light-blue-darker);
-    border-radius: calc(var(--border-radius-base) * 2);
-    transition-duration: 0.2s;
-    font-size: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--bg-dark-navy-lighter);
+  margin: 8px 0;
+  padding: 12px 20px;
+  border: 2px solid var(--primary-light-blue-darker);
+  border-radius: calc(var(--border-radius-base) * 2);
+  transition-duration: 0.2s;
+  font-size: 16px;
 }
 
 .aliasItem:hover {
-    border-color: var(--primary-light-blue-lighter);
+  border-color: var(--primary-light-blue-lighter);
 }
 
 .aliasKeyword,
 .aliasUrl,
 .removeBtn {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .aliasKeyword {
-    width: 64px;
+  width: 64px;
 }
 
 .aliasArrow {
-    width: 40px;
+  width: 40px;
 }
 
 .aliasUrl {
-    color: var(--text-primary);
-    margin-right: auto;
+  color: var(--text-primary);
+  margin-right: auto;
 }
 
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: var(--border-radius-base);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: var(--border-radius-base);
 }
 
 .button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .removeBtn {
-    width: 28px;
-    height: 28px;
-    background-color: var(--primary-highlight-red);
+  width: 28px;
+  height: 28px;
+  background-color: var(--primary-highlight-red);
 }
 
 .removeBtn:hover {
-    filter: brightness(112%);
+  filter: brightness(112%);
 }
