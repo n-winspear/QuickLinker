@@ -13,7 +13,10 @@
     "type": "module"
   },
   "permissions": ["storage"],
-  "omnibox": { "keyword": "ql" },
+  "host_permissions": ["<all_urls>"],
+  "omnibox": {
+    "keyword": "ql"
+  },
   "minimum_chrome_version": "102",
   "action": {
     "default_popup": "src/popup/popup.html",
@@ -27,7 +30,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/components/Alias.js"]
+      "js": ["src/components/QuickLink.js"]
     }
   ]
 }

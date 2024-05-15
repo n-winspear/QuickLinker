@@ -44,7 +44,7 @@ ul {
   list-style: none;
 }
 
-.aliasItem {
+.quickLinkItem {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -57,27 +57,27 @@ ul {
   font-size: 16px;
 }
 
-.aliasItem:hover {
+.quickLinkItem:hover {
   border-color: var(--primary-light-blue-lighter);
 }
 
-.aliasKeyword,
-.aliasUrl,
+.quickLinkKeyword,
+.quickLinkUrl,
 .removeBtn {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.aliasKeyword {
+.quickLinkKeyword {
   width: 64px;
 }
 
-.aliasArrow {
+.quickLinkArrow {
   width: 40px;
 }
 
-.aliasUrl {
+.quickLinkUrl {
   color: var(--text-primary);
   margin-right: auto;
 }

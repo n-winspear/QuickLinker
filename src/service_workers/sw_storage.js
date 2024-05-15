@@ -3,15 +3,9 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
     chrome.storage.local.set(
       {
         quickLinks: {
-          g: {
-            url: 'https://google.com',
-          },
-          fb: {
-            url: 'https://facebook.com',
-          },
-          yt: {
-            url: 'https://youtube.com',
-          },
+          gg: { url: 'https://google.com' },
+          yt: { url: 'https://youtube.com' },
+          gh: { url: 'https://github.com' },
         },
       },
       () => console.log('Default quickLinks object has been set.')
