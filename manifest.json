@@ -32,5 +32,11 @@
       "matches": ["<all_urls>"],
       "js": ["src/components/QuickLink.js"]
     }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/search/search.html", "src/search/search.js"],
+      "matches": ["<all_urls>"]
+    }
   ]
 }

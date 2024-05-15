@@ -1,3 +1,13 @@
+// Get all QuickLinks from storage
+export const getQuickLinks = () => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get('quickLinks', (data) => {
+      const quickLinks = data.quickLinks || {};
+      resolve(quickLinks);
+    });
+  });
+};
+
 // Adding new QuickLink to storage
 export const addQuickLink = (keyword, url) => {
   return new Promise((resolve, reject) => {

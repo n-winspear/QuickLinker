@@ -1,4 +1,7 @@
-import { deleteQuickLink } from '../modules/quickLinks/quickLinkManager.js';
+import {
+  getQuickLinks,
+  deleteQuickLink,
+} from '../modules/quickLinks/quickLinkManager.js';
 import QuickLink from '../components/QuickLink.js';
 
 const addEventListeners = () => {
@@ -25,8 +28,7 @@ const addEventListeners = () => {
 
 const displayQuickLinks = async () => {
   try {
-    const result = await chrome.storage.local.get('quickLinks');
-    const quickLinks = result.quickLinks || {};
+    const quickLinks = await getQuickLinks();
     const list = document.getElementById('quickLinkItems');
 
     const html = Object.keys(quickLinks)

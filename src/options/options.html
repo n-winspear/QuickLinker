@@ -31,6 +31,30 @@
       <div class="divider"></div>
       <div class="content">
         <ul id="quickLinkItems"></ul>
+        <div id="instructions" style="display: none">
+          <h2>Setup Instructions for Site Search</h2>
+          <p>To set up the site search, follow these steps:</p>
+          <ol>
+            <li>Open Chrome settings.</li>
+            <li>Go to "Search engine" and then "Manage search engines".</li>
+            <li>Click "Add" to create a new search engine.</li>
+            <li>
+              Fill in the fields:
+              <ul>
+                <li><strong>Search engine:</strong> Quick Linker</li>
+                <li><strong>Keyword:</strong> ql</li>
+                <li>
+                  <strong>URL with %s in place of query:</strong>
+                  <code
+                    >chrome-extension://<span id="extensionId"></span
+                    >/src/search/search.html?q=%s</code
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>Click "Add" to save the search engine.</li>
+          </ol>
+        </div>
       </div>
     </div>
   </body>
