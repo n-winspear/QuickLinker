@@ -27,7 +27,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/components/Alias.js", "src/service_workers/storage.js"]
+      "js": ["src/components/Alias.js"]
     }
   ]
 }

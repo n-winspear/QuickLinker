@@ -1,36 +1,20 @@
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === 'install') {
-    chrome.storage.local.set({
-      linkSuggestions: ['tabs', 'storage', 'scripting'],
-    });
+    chrome.storage.local.set(
+      {
+        quickLinks: {
+          g: {
+            url: 'https://google.com',
+          },
+          fb: {
+            url: 'https://facebook.com',
+          },
+          yt: {
+            url: 'https://youtube.com',
+          },
+        },
+      },
+      () => console.log('Default quickLinks object has been set.')
+    );
   }
 });
-
-export const saveAlias = async (id, keyword, url) => {
-  try {
-    const result = await chrome.storage.sync.get('aliases');
-    const aliases = result.aliases || {};
-
-    aliases[id] = { keyword, url };
-
-    await chrome.storage.sync.set({ aliases: aliases });
-
-    return { status: 'success' };
-  } catch (error) {
-    return { status: 'error', error: error };
-  }
-};
-
-export const removeAlias = async (id) => {
-  try {
-    const result = await chrome.storage.sync.get('aliases');
-    const aliases = result.aliases || {};
-
-    delete aliases[id];
-
-    await chrome.storage.sync.set({ aliases: aliases });
-    return { status: 'success' };
-  } catch (error) {
-    return { status: 'error', error: error };
-  }
-};

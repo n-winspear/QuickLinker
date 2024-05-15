@@ -1,76 +1,71 @@
-const clearInputFields = () => {
-  document.getElementById('keyword').value = '';
-  document.getElementById('url').value = '';
+import { addQuickLink } from '../modules/quickLinks/quickLinkManager.js';
+
+// Debounce function to limit the rate at which a function can fire.
+const debounce = (func, wait) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
 };
 
 const handleOptionsButtonClick = () => {
-  try {
-    chrome.runtime.openOptionsPage();
-  } catch (error) {
-    console.error(error);
-  }
+  chrome.runtime.openOptionsPage();
 };
 
 const handleSaveButtonClick = async () => {
   try {
     const keyword = document.getElementById('keyword').value.trim();
     const url = document.getElementById('url').value.trim();
-    const errorMessage = document.getElementById('errorMessage');
 
     if (!keyword || !url) {
-      errorMessage.classList.add('showError');
+      showMessage('Keyword and URL are required.', 'error');
       return;
     }
 
-    errorMessage.classList.remove('showError');
+    const success = await addQuickLink(keyword, url);
 
-    const id = Math.random() * 10000;
-
-    await chrome.runtime.sendMessage({
-      action: 'saveAlias',
-      id: id,
-      keyword: keyword,
-      url: url,
-    });
-
-    clearInputFields();
-  } catch (error) {
-    console.error(error);
-    alert('Please enter a valid Keyword and URL');
-  }
-};
-
-// Event listeners
-document
-  .getElementById('optionsBtn')
-  .addEventListener('click', handleOptionsButtonClick);
-
-document
-  .getElementById('saveBtn')
-  .addEventListener('click', handleSaveButtonClick);
-
-document.getElementById('keyword').addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') handleSaveButtonClick();
-});
-
-document.getElementById('url').addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') handleSaveButtonClick();
-});
-
-// Response listener from background.js
-chrome.runtime.onMessage.addListener((message) => {
-  try {
-    const { action, status, error } = message;
-
-    switch (action) {
-      case 'saveAlias':
-        if (!status === 'success') throw new Error(error);
-        break;
-
-      default:
-        throw new Error('Popup response listener action not defined', action);
+    if (success) {
+      clearInputFields();
+      showMessage('Quick link added successfully.', 'success');
+    } else {
+      showMessage('Keyword already exists.', 'error');
     }
   } catch (error) {
     console.error(error);
+    showMessage('An error occurred while adding the quick link.', 'error');
   }
-});
+};
+
+const handleEnterKey = (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    handleSaveButtonClick();
+  }
+};
+
+document
+  .getElementById('optionsBtn')
+  .addEventListener('click', handleOptionsButtonClick);
+document
+  .getElementById('saveBtn')
+  .addEventListener('click', debounce(handleSaveButtonClick, 300));
+document.getElementById('keyword').addEventListener('keydown', handleEnterKey);
+document.getElementById('url').addEventListener('keydown', handleEnterKey);
+
+const clearInputFields = () => {
+  document.getElementById('keyword').value = '';
+  document.getElementById('url').value = '';
+};
+
+const showMessage = (message, type) => {
+  const messageElement = document.getElementById('message');
+  messageElement.textContent = message;
+  messageElement.className = ''; // Clear previous classes
+  messageElement.classList.add(type);
+  messageElement.style.display = 'flex';
+
+  setTimeout(() => {
+    messageElement.style.display = 'none';
+  }, 5000);
+};

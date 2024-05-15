@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link rel="stylesheet" href="../styles/variables.css" />
-        <link rel="stylesheet" href="../styles/global.css" />
-        <link rel="stylesheet" href="popup.css" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        <link
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            rel="stylesheet"
-        />
-        <script type="module" src="popup.js" defer></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="titleContainer">
-                <h1>New Alias</h1>
-            </div>
-            <div class="inputsContainer">
-                <input type="text" placeholder="Keyword" id="keyword" />
-                <input type="text" placeholder="URL" id="url" />
-                <span id="errorMessage" class="popupError"
-                    >Please enter a valid url and keyword</span
-                >
-                <div class="buttonsContainer">
-                    <div id="optionsBtn" class="button" role="button">
-                        <i class="material-icons" style="font-size: 20px"
-                            >settings</i
-                        >
-                    </div>
-                    <div id="saveBtn" class="button" role="button">Save</div>
-                </div>
-            </div>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="../styles/variables.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script type="module" src="popup.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="titleContainer">
+        <h1>New Alias</h1>
+      </div>
+      <div class="inputsContainer">
+        <input type="text" placeholder="Keyword" id="keyword" />
+        <input type="text" placeholder="URL" id="url" />
+        <span id="message"></span>
+        <div class="buttonsContainer">
+          <div id="optionsBtn" class="button" role="button">
+            <i class="material-icons" style="font-size: 20px">settings</i>
+          </div>
+          <div id="saveBtn" class="button" role="button">Save</div>
         </div>
-    </body>
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,24 +1,6 @@
 import './service_workers/sw_omnibox.js';
 import './service_workers/sw_storage.js';
 
-// Listener for Omnibox (URL bar) events
-chrome.omnibox.onInputEntered.addListener(async (text) => {
-  try {
-    const result = await chrome.storage.sync.get('aliases');
-    const aliasesArray = Object.values(result.aliases);
-
-    const matchedAlias = aliasesArray.find((alias) => alias.keyword === text);
-
-    const url = matchedAlias
-      ? matchedAlias.url
-      : `https://www.google.com/search?q=${text}`;
-
-    await chrome.tabs.update({ url: url });
-  } catch (error) {
-    console.error(error);
-  }
-});
-
 // Listener for Popup events
 chrome.runtime.onMessage.addListener(async (message, sender) => {
   const { action, id, keyword, url } = message;
