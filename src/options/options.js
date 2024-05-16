@@ -49,4 +49,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
+// Display instructions if query parameter is present
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('showInstructions')) {
+  document.getElementById('instructions').style.display = 'block';
+  document.getElementById('extensionId').textContent = chrome.runtime.id;
+}
+
 displayQuickLinks();

@@ -1,27 +1,27 @@
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason === 'install') {
     // Notify the user
-    chrome.notifications.create({
-      type: 'basic',
-      iconUrl: 'src/icons/icon128.png',
-      title: 'Quick Linker Installed',
-      message: 'To set up site search, please follow the instructions.',
-      buttons: [{ title: 'Show Instructions' }],
-      priority: 1,
-    });
+    // chrome.notifications.create({
+    //   type: 'basic',
+    //   iconUrl: 'src/icons/icon128.png',
+    //   title: 'Quick Linker Installed',
+    //   message: 'To set up site search, please follow the instructions.',
+    //   buttons: [{ title: 'Show Instructions' }],
+    //   priority: 1,
+    // });
 
-    chrome.notifications.onButtonClicked.addListener(
-      (notificationId, buttonIndex) => {
-        if (buttonIndex === 0) {
-          chrome.tabs.create({
-            url:
-              'chrome-extension://' +
-              chrome.runtime.id +
-              '/src/options/options.html?showInstructions=true',
-          });
-        }
-      }
-    );
+    // chrome.notifications.onButtonClicked.addListener(
+    //   (notificationId, buttonIndex) => {
+    //     if (buttonIndex === 0) {
+    //       chrome.tabs.create({
+    //         url:
+    //           'chrome-extension://' +
+    //           chrome.runtime.id +
+    //           '/src/options/options.html?showInstructions=true',
+    //       });
+    //     }
+    //   }
+    // );
 
     // Set default QuickLinks
     chrome.storage.local.set(
