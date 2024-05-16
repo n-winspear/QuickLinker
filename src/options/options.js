@@ -1,8 +1,8 @@
 import {
   getQuickLinks,
   deleteQuickLink,
-} from '../modules/quickLinks/quickLinkManager.js';
-import QuickLink from '../components/QuickLink.js';
+} from '../dependencies/storage/quickLinkManager.js';
+import { QuickLink } from '../components/QuickLink.js';
 
 const addEventListeners = () => {
   try {

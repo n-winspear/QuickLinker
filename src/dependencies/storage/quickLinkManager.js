@@ -21,7 +21,7 @@ export const addQuickLink = (keyword, url) => {
       quickLinks[keyword] = { url };
       chrome.storage.local.set({ quickLinks }, () => {
         console.log(`Quick link for '${keyword}' added.`);
-        chrome.runtime.sendMessage({ action: 'quickLinkAdded', keyword, url });
+        //chrome.runtime.sendMessage({ action: 'quickLinkAdded', keyword, url });
         resolve(true);
       });
     });

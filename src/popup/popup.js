@@ -1,4 +1,4 @@
-import { addQuickLink } from '../modules/quickLinks/quickLinkManager.js';
+import { addQuickLink } from '../dependencies/storage/quickLinkManager.js';
 
 // Debounce function to limit the rate at which a function can fire.
 const debounce = (func, wait) => {
@@ -61,7 +61,7 @@ const clearInputFields = () => {
 const showMessage = (message, type) => {
   const messageElement = document.getElementById('message');
   messageElement.textContent = message;
-  messageElement.className = ''; // Clear previous classes
+  messageElement.className = '';
   messageElement.classList.add(type);
   messageElement.style.display = 'flex';
 

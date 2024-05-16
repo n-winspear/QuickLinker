@@ -12,7 +12,7 @@
     "service_worker": "src/service_worker.js",
     "type": "module"
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "host_permissions": ["<all_urls>"],
   "omnibox": {
     "keyword": "ql"
@@ -35,7 +35,10 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["src/search/search.html", "src/search/search.js"],
+      "resources": [
+        "src/dependencies/search/search.html",
+        "src/dependencies/search/search.js"
+      ],
       "matches": ["<all_urls>"]
     }
   ]

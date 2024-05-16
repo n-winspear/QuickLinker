@@ -1,4 +1,4 @@
-import { getQuickLinks } from '../modules/quickLinks/quickLinkManager.js';
+import { getQuickLinks } from '../storage/quickLinkManager.js';
 
 const params = new URLSearchParams(window.location.search);
 const query = params.get('q');

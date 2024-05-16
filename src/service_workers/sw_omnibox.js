@@ -1,4 +1,4 @@
-import { getQuickLinks } from '../modules/quickLinks/quickLinkManager.js';
+import { getQuickLinks } from '../dependencies/storage/quickLinkManager.js';
 
 // Suggest keywords based on input
 chrome.omnibox.onInputChanged.addListener(async (input, suggest) => {
@@ -20,23 +20,6 @@ chrome.omnibox.onInputChanged.addListener(async (input, suggest) => {
     suggest(suggestions);
   }
 });
-
-// Navigate to the URL on input enter
-// chrome.omnibox.onInputEntered.addListener((input) => {
-//   chrome.storage.local.get('quickLinks', ({ quickLinks }) => {
-//     const url = quickLinks[input]?.url;
-//     if (url) {
-//       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-//         chrome.tabs.update(tabs[0].id, { url });
-//       });
-//     } else {
-//       const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(
-//         input
-//       )}`;
-//       chrome.tabs.update(tabs[0].id, { url: searchUrl });
-//     }
-//   });
-// });
 
 chrome.omnibox.onInputEntered.addListener(async (input) => {
   const quickLinks = await getQuickLinks();

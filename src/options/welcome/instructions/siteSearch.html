@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quick Linker - Setup Instructions</title>
+    <link rel="stylesheet" href="../styles/variables.css" />
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="../options.css" />
+    <script src="instructions.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <span id="nav-title">Quick Linker</span>
+        <img
+          id="nav-logo"
+          src="../../images/quick-linker-logo-nobg.png"
+          alt="Quick Linker Logo"
+        />
+      </nav>
+      <div class="divider"></div>
+      <div class="content">
+        <h2>Setup Instructions for Site Search</h2>
+        <p>To set up the site search, follow these steps:</p>
+        <ol>
+          <li>Open Chrome settings.</li>
+          <li>Go to "Search engine" and then "Manage search engines".</li>
+          <li>Click "Add" to create a new search engine.</li>
+          <li>
+            Fill in the fields:
+            <ul>
+              <li><strong>Search engine:</strong> Quick Linker</li>
+              <li><strong>Keyword:</strong> ql</li>
+              <li>
+                <strong>URL with %s in place of query:</strong>
+                <code id="searchUrl"
+                  >chrome-extension://<span id="extensionId"></span
+                  >/src/search/search.html?q=%s</code
+                >
+                <button id="copyButton">Copy</button>
+              </li>
+            </ul>
+          </li>
+          <li>Click "Add" to save the search engine.</li>
+        </ol>
+      </div>
+    </div>
+  </body>
+</html>

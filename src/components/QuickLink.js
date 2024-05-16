@@ -1,4 +1,4 @@
-const QuickLink = (keyword, url) => `
+export const QuickLink = (keyword, url) => `
   <li class="quickLinkItem" data-keyword="${keyword}">
     <span class="quickLinkKeyword">${keyword}</span>
     <span class="quickLinkArrow">→</span>
@@ -8,5 +8,3 @@ const QuickLink = (keyword, url) => `
     </button>
   </li>
 `;
-
-export default QuickLink;
