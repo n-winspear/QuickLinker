@@ -4,12 +4,12 @@
   "version": "2.1.0",
   "description": "Quickly navigate to regularly accessed websites using keyword shortcuts.",
   "icons": {
-    "16": "src/icons/icon16.png",
-    "48": "src/icons/icon48.png",
-    "128": "src/icons/icon128.png"
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "background": {
-    "service_worker": "src/service_worker.js",
+    "service_worker": "service_worker.js",
     "type": "module"
   },
   "permissions": ["storage", "tabs"],
@@ -19,17 +19,17 @@
   },
   "minimum_chrome_version": "102",
   "action": {
-    "default_popup": "src/popup/popup.html",
+    "default_popup": "popup/popup.html",
     "default_icon": {
-      "16": "src/icons/icon16.png",
-      "48": "src/icons/icon48.png",
-      "128": "src/icons/icon128.png"
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
     }
   },
-  "options_page": "src/options/options.html",
+  "options_page": "options/options.html",
   "web_accessible_resources": [
     {
-      "resources": ["src/search/search.html", "src/search/search.js"],
+      "resources": ["search/search.html", "search/search.js"],
       "matches": ["<all_urls>"]
     }
   ]
