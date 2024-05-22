@@ -14,11 +14,17 @@ const handleSearch = async (query) => {
     const keyword = query.trim();
     if (quickLinks[keyword]) {
       const url = quickLinks[keyword].url;
-      window.location.replace(url);
+      chrome.tabs.update(null, {
+        url: url,
+        active: false,
+      });
     } else {
       console.log(`No quick link found for keyword: ${keyword}`);
       const url = `https://www.google.com/search?q=${query}`;
-      window.location.replace(url);
+      chrome.tabs.update(null, {
+        url: url,
+        active: false,
+      });
     }
   }
 };
