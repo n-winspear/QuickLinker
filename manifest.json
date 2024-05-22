@@ -27,18 +27,9 @@
     }
   },
   "options_page": "src/options/options.html",
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["src/components/QuickLink.js"]
-    }
-  ],
   "web_accessible_resources": [
     {
-      "resources": [
-        "src/dependencies/search/search.html",
-        "src/dependencies/search/search.js"
-      ],
+      "resources": ["src/search/search.html", "src/search/search.js"],
       "matches": ["<all_urls>"]
     }
   ]
