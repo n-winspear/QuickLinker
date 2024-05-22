@@ -3,6 +3,11 @@ import {
   deleteQuickLink,
 } from '../dependencies/storage/quickLinkManager.js';
 
+import {
+  importQuickLinks,
+  exportQuickLinks,
+} from '../dependencies/storage/localStorageManager.js';
+
 const QuickLink = (keyword, url) => `
   <li class="quickLinkItem" data-keyword="${keyword}">
     <span class="quickLinkKeyword">${keyword}</span>
@@ -14,7 +19,7 @@ const QuickLink = (keyword, url) => `
   </li>
 `;
 
-const addEventListeners = () => {
+const addQuickLinkComponentEventListeners = () => {
   try {
     Array.from(document.getElementsByClassName('quickLinkItem')).forEach(
       (item) => {
@@ -46,24 +51,27 @@ const displayQuickLinks = async () => {
       .join('');
 
     list.innerHTML = html;
-    addEventListeners();
+    addQuickLinkComponentEventListeners();
   } catch (error) {
     console.error(error);
   }
 };
 
-// Listen for messages to refresh the list
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === 'quickLinkAdded') {
-    displayQuickLinks();
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'quickLinkAdded') {
+      console.log('Received quickLinkAdded message');
+      displayQuickLinks();
+      sendResponse({ status: 'success' });
+    }
+  });
+
+  document
+    .getElementById('exportBtn')
+    .addEventListener('click', exportQuickLinks);
+  document
+    .getElementById('importBtn')
+    .addEventListener('click', importQuickLinks);
+
+  displayQuickLinks();
 });
-
-// Display instructions if query parameter is present
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('showInstructions')) {
-  document.getElementById('instructions').style.display = 'block';
-  document.getElementById('extensionId').textContent = chrome.runtime.id;
-}
-
-displayQuickLinks();

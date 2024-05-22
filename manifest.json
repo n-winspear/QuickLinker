@@ -26,6 +26,15 @@
       "128": "icons/icon128.png"
     }
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "dependencies/storage/localStorageManager.js",
+        "dependencies/storage/quickLinkManager.js"
+      ]
+    }
+  ],
   "options_page": "options/options.html",
   "web_accessible_resources": [
     {
