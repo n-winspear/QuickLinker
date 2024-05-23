@@ -58,17 +58,47 @@
         <div class="column-2">
           <div id="new-quick-link-container" class="content-block">
             <h3 class="space-mono-bold block-title">New Quick Link</h3>
+            <div class="new-link-inputs">
+              <input
+                type="text"
+                placeholder="Shortcut"
+                class="new-link-input"
+              />
+              <input type="text" placeholder="Link" class="new-link-input" />
+              <input
+                type="text"
+                placeholder="Name (optional)"
+                class="new-link-input"
+              />
+              <div class="new-link-actions">
+                <button id="clearBtn" class="space-mono-bold">Clear</button>
+                <button id="saveBtn" class="space-mono-bold">Save Link</button>
+              </div>
+            </div>
           </div>
           <div id="import-quick-links-container" class="content-block">
-            <h3 class="space-mono-bold block-title">Import Quick Links</h3>
+            <h3 class="block-title">Import Quick Links</h3>
+            <div class="upload-box">
+              <input type="file" id="file-upload" hidden />
+              <span class="material-symbols-outlined upload-icon">
+                upload
+              </span>
+              <div class="upload-text" onclick="triggerFileUpload()">
+                <span>Drag & Drop to Upload</span>
+                <span id="orTxt" class="roboto-light">or</span>
+              </div>
+              <button
+                id="browseBtn"
+                class="space-mono-bold"
+                onclick="triggerFileUpload()"
+              >
+                Browse
+              </button>
+            </div>
+            <button id="importBtn" class="space-mono-bold">Import Links</button>
           </div>
         </div>
       </div>
     </div>
   </body>
 </html>
-
-<!--
-        <button id="exportBtn">Export QuickLinks</button>
-        <button id="importBtn">Import QuickLinks</button>
-      -->
