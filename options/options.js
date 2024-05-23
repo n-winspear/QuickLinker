@@ -60,7 +60,6 @@ const displayQuickLinks = async () => {
 document.addEventListener('DOMContentLoaded', () => {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'quickLinkAdded') {
-      console.log('Received quickLinkAdded message');
       displayQuickLinks();
       sendResponse({ status: 'success' });
     }
@@ -68,10 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document
     .getElementById('exportBtn')
-    .addEventListener('click', exportQuickLinks);
-  document
-    .getElementById('importBtn')
-    .addEventListener('click', importQuickLinks);
+    .addEventListener('click', async () => await exportQuickLinks());
+
+  document.getElementById('importBtn').addEventListener('click', async () => {
+    await importQuickLinks();
+    displayQuickLinks();
+  });
 
   displayQuickLinks();
 });
