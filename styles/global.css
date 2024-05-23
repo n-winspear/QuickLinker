@@ -1,27 +1,61 @@
+:root {
+  /* Vermilion Theme */
+  --theme-vermilion-light-primary: 246, 243, 229;
+  --theme-vermilion-light-secondary: 47, 19, 6;
+  --theme-vermilion-light-tertiary: 216, 63, 3;
+  --theme-vermilion-light-dark: 47, 19, 6;
+  --theme-vermilion-light-medium: 187, 187, 187;
+  --theme-vermilion-light-light: 251, 247, 245;
+  --theme-vermilion-light-boxshadow: 47, 19, 6;
+
+  /* Active Theme */
+
+  --theme-active-primary: var(--theme-vermilion-light-primary);
+  --theme-active-secondary: var(--theme-vermilion-light-secondary);
+  --theme-active-tertiary: var(--theme-vermilion-light-tertiary);
+  --theme-active-dark: var(--theme-vermilion-light-dark);
+  --theme-active-medium: var(--theme-vermilion-light-medium);
+  --theme-active-light: var(--theme-vermilion-light-light);
+  --theme-active-boxshadow: var(--theme-vermilion-light-boxshadow);
+
+  /* Page Container */
+  --page-container-width: 1000px;
+}
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
 }
 
 body {
-    font-family: 'Inter', Arial, sans-serif;
-    background-color: var(--bg-dark-navy);
-    color: var(--text-primary);
+  background-color: rgba(var(--theme-active-light), 1);
+  color: rgba(var(--theme-active-dark), 1);
+  height: 100%;
+}
+
+button {
+  background-color: rgba(var(--theme-active-tertiary), 1);
+  color: rgba(var(--theme-active-light));
+  border: rgba(var(--theme-active-tertiary), 1);
 }
 
 a:link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:visited {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:active {
-    text-decoration: none;
+  text-decoration: none;
 }
