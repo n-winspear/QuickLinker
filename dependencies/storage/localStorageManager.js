@@ -10,16 +10,15 @@ export const exportQuickLinks = async () => {
   link.href = url;
   link.download = 'quickLinks.json';
 
-  return new Promise((resolve) => {
-    link.onclick = () => {
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-      console.log('Export complete.');
-      resolve();
-    };
-    document.body.appendChild(link);
-    link.click();
-  });
+  document.body.appendChild(link);
+  link.click();
+
+  // Clean up
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+
+  console.log('Export complete.');
+  return Promise.resolve();
 };
 
 export const importQuickLinks = async () => {
