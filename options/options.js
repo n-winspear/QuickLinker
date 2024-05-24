@@ -16,22 +16,22 @@ import { getRootDomain } from '../helpers/getRootDomain.js';
 
 const QuickLink = (shortcut, link, name) => `
   <li class="quick-link-component" data-shortcut="${shortcut}">
-  <p id="shortcut">${shortcut}</p>
-  <p id="name">${name}</p>
-  <div class="component-actions">
-    <div class="view-link-popup" data-link-action-popup>
-      <span id="viewLinkBtn" class="material-symbols-outlined action-icon" data-link-action-popup-btn>
-        visibility
-      </span>
-      <p class="view-link-popup-content">${link}</p>
+    <div class="quick-link-summary">
+      <p id="shortcut">${shortcut}</p>
+      <p id="name">${name}</p>
+      <div class="component-actions">
+        <span id="viewLinkBtn" class="material-symbols-outlined action-icon" data-link-action-popup-btn>
+          visibility
+        </span>
+        <span id="editBtn" class="material-symbols-outlined action-icon">
+          edit
+        </span>
+        <span id="deleteBtn" class="material-symbols-outlined action-icon">
+          delete
+        </span>
+      </div>
     </div>
-    <span id="editBtn" class="material-symbols-outlined action-icon">
-      edit
-    </span>
-    <span id="deleteBtn" class="material-symbols-outlined action-icon">
-      delete
-    </span>
-  </div>
+    <div class="quick-link-details"><p><i>${link}</i></p></div>
   </li>
 `;
 
@@ -43,6 +43,12 @@ const addQuickLinkComponentEventListeners = () => {
         let viewLinkBtn = item.querySelector('#viewLinkBtn');
         let editBtn = item.querySelector('#editBtn');
         let deleteBtn = item.querySelector('#deleteBtn');
+
+        viewLinkBtn.addEventListener('click', () => {
+          item
+            .querySelector('.quick-link-details')
+            .classList.toggle('show-details');
+        });
 
         deleteBtn.addEventListener('click', async () => {
           const success = await deleteQuickLink(shortcut);
@@ -171,32 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Event listeners for QuickLink actions
-  document.addEventListener('click', (e) => {
-    const isLinkPopupActionBtn = e.target.matches(
-      '[data-link-action-popup-btn]'
-    );
-    if (
-      !isLinkPopupActionBtn &&
-      e.target.closest('[data-link-action-popup]') != null
-    ) {
-      return;
-    }
-
-    let currentLinkActionPopup;
-    if (isLinkPopupActionBtn) {
-      currentLinkActionPopup = e.target.closest('[data-link-action-popup]');
-      currentLinkActionPopup.classList.toggle('active-popup');
-    }
-
-    document
-      .querySelectorAll('[data-link-action-popup].active-popup')
-      .forEach((popup) => {
-        if (popup === currentLinkActionPopup) {
-          return;
-        }
-        popup.classList.remove('active-popup');
-      });
-  });
 
   // Event listeners for Export
   document
