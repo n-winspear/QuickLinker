@@ -12,15 +12,19 @@ import {
 
 import { debounce } from '../helpers/debounce.js';
 import { sortQuickLinks } from '../helpers/sortQuickLinks.js';
+import { getRootDomain } from '../helpers/getRootDomain.js';
 
 const QuickLink = (shortcut, link, name) => `
   <li class="quick-link-component" data-shortcut="${shortcut}">
   <p id="shortcut">${shortcut}</p>
   <p id="name">${name}</p>
   <div class="component-actions">
-    <span id="viewLinkBtn" class="material-symbols-outlined action-icon">
-      visibility
-    </span>
+    <div class="view-link-popup" data-link-action-popup>
+      <span id="viewLinkBtn" class="material-symbols-outlined action-icon" data-link-action-popup-btn>
+        visibility
+      </span>
+      <p class="view-link-popup-content">${link}</p>
+    </div>
     <span id="editBtn" class="material-symbols-outlined action-icon">
       edit
     </span>
@@ -62,9 +66,14 @@ const displayQuickLinks = async () => {
     const list = document.getElementById('quick-link-components');
 
     const html = Object.keys(sortedLinks)
-      .map((keyword) =>
-        QuickLink(keyword, sortedLinks[keyword].link, sortedLinks[keyword].name)
-      )
+      .map((keyword) => {
+        const name =
+          'name' in sortedLinks[keyword]
+            ? sortedLinks[keyword].name
+            : 'Could not identify.';
+
+        return QuickLink(keyword, sortedLinks[keyword].link, name);
+      })
       .join('');
 
     list.innerHTML = html;
@@ -79,11 +88,17 @@ const handleSaveButtonClick = async () => {
   try {
     const shortcut = document.getElementById('shortcutInput').value.trim();
     const link = document.getElementById('linkInput').value.trim();
-    const name = document.getElementById('nameInput').value.trim();
+    let name = document.getElementById('nameInput').value.trim();
+
+    console.log('here', typeof name);
 
     if (!shortcut || !link) {
       showMessage('Shortcut and Link are required.', 'error');
       return;
+    }
+
+    if (name === '' || name === undefined) {
+      name = await getRootDomain(link);
     }
 
     // TODO: FIX THE SHOW MESSGE FUNCTION
@@ -153,6 +168,34 @@ document.addEventListener('DOMContentLoaded', () => {
       displayQuickLinks();
       sendResponse({ status: 'success' });
     }
+  });
+
+  // Event listeners for QuickLink actions
+  document.addEventListener('click', (e) => {
+    const isLinkPopupActionBtn = e.target.matches(
+      '[data-link-action-popup-btn]'
+    );
+    if (
+      !isLinkPopupActionBtn &&
+      e.target.closest('[data-link-action-popup]') != null
+    ) {
+      return;
+    }
+
+    let currentLinkActionPopup;
+    if (isLinkPopupActionBtn) {
+      currentLinkActionPopup = e.target.closest('[data-link-action-popup]');
+      currentLinkActionPopup.classList.toggle('active-popup');
+    }
+
+    document
+      .querySelectorAll('[data-link-action-popup].active-popup')
+      .forEach((popup) => {
+        if (popup === currentLinkActionPopup) {
+          return;
+        }
+        popup.classList.remove('active-popup');
+      });
   });
 
   // Event listeners for Export
