@@ -16,6 +16,10 @@
   filter: brightness(101%);
 }
 
+.upload-box-drag {
+  border-color: rgba(var(--theme-active-tertiary), 1);
+}
+
 .upload-icon {
   font-size: 64px;
   color: rgba(var(--theme-active-medium), 1);

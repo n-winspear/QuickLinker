@@ -24,6 +24,15 @@ export const exportQuickLinks = async () => {
 
 export const importQuickLinks = async () => {
   console.log('Importing quickLinks...');
+  try {
+    const file = await selectQuickLinksFile();
+    await processQuickLinksFile(file);
+  } catch (error) {
+    console.error('Error importing quickLinks:', error);
+  }
+};
+
+export const selectQuickLinksFile = () => {
   return new Promise((resolve, reject) => {
     const input = document.createElement('input');
     input.type = 'file';
@@ -34,25 +43,30 @@ export const importQuickLinks = async () => {
         reject('No file selected');
         return;
       }
-
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        try {
-          const importedData = JSON.parse(e.target.result);
-          chrome.storage.local.set({ quickLinks: importedData }, () => {
-            alert('QuickLinks imported successfully!');
-            resolve();
-          });
-        } catch (error) {
-          alert('Failed to import QuickLinks: Invalid JSON file.');
-          reject(error);
-        }
-      };
-      reader.readAsText(file);
+      resolve(file);
     };
 
     document.body.appendChild(input);
     input.click();
     document.body.removeChild(input);
+  });
+};
+
+export const processQuickLinksFile = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        const importedData = JSON.parse(e.target.result);
+        chrome.storage.local.set({ quickLinks: importedData }, () => {
+          alert('QuickLinks imported successfully!');
+          resolve();
+        });
+      } catch (error) {
+        alert('Failed to import QuickLinks: Invalid JSON file.');
+        reject(error);
+      }
+    };
+    reader.readAsText(file);
   });
 };

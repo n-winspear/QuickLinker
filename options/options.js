@@ -7,6 +7,7 @@ import {
 import {
   importQuickLinks,
   exportQuickLinks,
+  processQuickLinksFile,
 } from '../dependencies/storage/localStorageManager.js';
 
 import { debounce } from '../helpers/debounce.js';
@@ -127,6 +128,25 @@ const showMessage = (message, type) => {
   }, 5000);
 };
 
+const handleFileDrop = async (e) => {
+  const dt = e.dataTransfer;
+  const files = dt.files;
+
+  if (files.length > 0) {
+    const file = files[0];
+    if (file.type === 'application/json') {
+      try {
+        await processQuickLinksFile(file);
+        displayQuickLinks();
+      } catch (error) {
+        console.error('Error processing dropped file:', error);
+      }
+    } else {
+      alert('Please drop a valid JSON file.');
+    }
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'quickLinkAdded') {
@@ -151,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .querySelectorAll('#shortcutInput, #linkInput, #nameInput')
     .forEach((element) => element.addEventListener('keydown', handleEnterKey));
 
+  // Event listeners for Import
   document.querySelectorAll('.importBtn').forEach((element) =>
     element.addEventListener(
       'click',
@@ -160,6 +181,52 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 300)
     )
   );
+
+  // Handling drag & drop
+  const uploadBox = document.getElementById('upload-box');
+
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach((eventName) => {
+    uploadBox.addEventListener(
+      eventName,
+      (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      },
+      false
+    );
+    document.body.addEventListener(
+      eventName,
+      (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      },
+      false
+    );
+  });
+
+  // Highlight the drop area when the file is over it
+  ['dragenter', 'dragover'].forEach((eventName) => {
+    uploadBox.addEventListener(
+      eventName,
+      () => {
+        uploadBox.classList.add('upload-box-drag');
+      },
+      false
+    );
+  });
+
+  ['dragleave', 'drop'].forEach((eventName) => {
+    uploadBox.addEventListener(
+      eventName,
+      () => {
+        uploadBox.classList.remove('upload-box-drag');
+      },
+      false
+    );
+  });
+
+  // Handle dropped files
+  uploadBox.addEventListener('drop', handleFileDrop, false);
 
   displayQuickLinks();
 });
