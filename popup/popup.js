@@ -1,13 +1,5 @@
 import { addQuickLink } from '../dependencies/storage/quickLinkManager.js';
-
-// Debounce function to limit the rate at which a function can fire.
-const debounce = (func, wait) => {
-  let timeout;
-  return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), wait);
-  };
-};
+import { debounce } from '../helpers/debounce.js';
 
 const handleOptionsButtonClick = () => {
   chrome.runtime.openOptionsPage();
@@ -15,21 +7,24 @@ const handleOptionsButtonClick = () => {
 
 const handleSaveButtonClick = async () => {
   try {
-    const keyword = document.getElementById('keyword').value.trim();
-    const url = document.getElementById('url').value.trim();
+    const shortcut = document.getElementById('shortcutInput').value.trim();
+    const link = document.getElementById('linkInput').value.trim();
+    const name = document.getElementById('nameInput').value.trim();
 
-    if (!keyword || !url) {
-      showMessage('Keyword and URL are required.', 'error');
+    if (!shortcut || !link) {
+      showMessage('Shortcut and Link are required.', 'error');
       return;
     }
 
-    const success = await addQuickLink(keyword, url);
+    // TODO: FIX THE SHOW MESSGE FUNCTION
+
+    const success = await addQuickLink(shortcut, link, name);
 
     if (success) {
       clearInputFields();
       showMessage('Quick link added successfully.', 'success');
     } else {
-      showMessage('Keyword already exists.', 'error');
+      showMessage('Shortcut already exists.', 'error');
     }
   } catch (error) {
     console.error(error);
@@ -44,18 +39,10 @@ const handleEnterKey = (event) => {
   }
 };
 
-document
-  .getElementById('optionsBtn')
-  .addEventListener('click', handleOptionsButtonClick);
-document
-  .getElementById('saveBtn')
-  .addEventListener('click', debounce(handleSaveButtonClick, 300));
-document.getElementById('keyword').addEventListener('keydown', handleEnterKey);
-document.getElementById('url').addEventListener('keydown', handleEnterKey);
-
 const clearInputFields = () => {
-  document.getElementById('keyword').value = '';
-  document.getElementById('url').value = '';
+  document.getElementById('shortcutInput').value = '';
+  document.getElementById('linkInput').value = '';
+  document.getElementById('nameInput').value = '';
 };
 
 const showMessage = (message, type) => {
@@ -69,3 +56,18 @@ const showMessage = (message, type) => {
     messageElement.style.display = 'none';
   }, 5000);
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  document
+    .getElementById('optionsBtn')
+    .addEventListener('click', handleOptionsButtonClick);
+  document
+    .getElementById('clearBtn')
+    .addEventListener('click', clearInputFields);
+  document
+    .getElementById('saveBtn')
+    .addEventListener('click', debounce(handleSaveButtonClick, 300));
+  document
+    .querySelectorAll('#shortcutInput, #linkInput, #nameInput')
+    .forEach((element) => element.addEventListener('keydown', handleEnterKey));
+});

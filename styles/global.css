@@ -46,8 +46,23 @@ button {
   cursor: pointer;
 }
 
-input {
-  font-size: 12;
+button:hover {
+  filter: brightness(105%);
+}
+
+button.inverted {
+  background-color: rgba(var(--theme-active-light), 1);
+  color: rgba(var(--theme-active-tertiary));
+  border: solid 1px rgba(var(--theme-active-tertiary), 1);
+}
+
+button.inverted:hover {
+  background-color: rgba(var(--theme-active-tertiary), 1);
+  color: rgba(var(--theme-active-light));
+}
+
+input[type='text'] {
+  font-size: 12px;
   line-height: 18px;
   padding: 10px 16px;
   width: 100%;
@@ -55,6 +70,22 @@ input {
   border: solid 1px rgba(var(--theme-active-medium), 1);
   background-color: rgba(var(--theme-active-light), 1);
   color: rgba(var(--theme-active-dark), 1);
+}
+
+input[type='text']::placeholder {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-style: normal;
+  color: rgba(var(--theme-active-medium), 1);
+}
+
+input[type='text']:focus {
+  outline: solid 1px rgba(var(--theme-active-tertiary), 1);
+  filter: brightness(101%);
+}
+
+li {
+  list-style: none;
 }
 
 a:link {

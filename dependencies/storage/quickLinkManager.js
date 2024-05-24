@@ -9,18 +9,18 @@ export const getQuickLinks = () => {
 };
 
 // Adding new QuickLink to storage
-export const addQuickLink = (keyword, url) => {
+export const addQuickLink = (shortcut, link, name) => {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get('quickLinks', (data) => {
       const quickLinks = data.quickLinks || {};
-      if (quickLinks[keyword]) {
-        console.error(`Quick link for '${keyword}' already exists.`);
+      if (quickLinks[shortcut]) {
+        console.error(`Quick link for '${shortcut}' already exists.`);
         resolve(false);
         return;
       }
-      quickLinks[keyword] = { url };
+      quickLinks[shortcut] = { link, name };
       chrome.storage.local.set({ quickLinks }, () => {
-        console.log(`Quick link for '${keyword}' added.`);
+        console.log(`Quick link for '${shortcut}' added.`);
         chrome.runtime.sendMessage({ action: 'quickLinkAdded' });
         resolve(true);
       });
@@ -29,18 +29,20 @@ export const addQuickLink = (keyword, url) => {
 };
 
 // Editing QuickLink in storage
-export const editQuickLink = (keyword, newUrl) => {
+export const editQuickLink = (shortcut, newLink, newName) => {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get('quickLinks', (data) => {
       const quickLinks = data.quickLinks || {};
-      if (!quickLinks[keyword]) {
-        console.error(`Quick link for '${keyword}' not found.`);
+      if (!quickLinks[shortcut]) {
+        console.error(`Quick link for '${shortcut}' not found.`);
         resolve(false);
         return;
       }
-      quickLinks[keyword].url = newUrl;
+      quickLinks[shortcut].link = newLink;
+      quickLinks[shortcut].name = newName;
+
       chrome.storage.local.set({ quickLinks }, () => {
-        console.log(`Quick link for '${keyword}' updated.`);
+        console.log(`Quick link for '${shortcut}' updated.`);
         resolve(true);
       });
     });
@@ -48,18 +50,18 @@ export const editQuickLink = (keyword, newUrl) => {
 };
 
 // Deleting QuickLink from storage
-export const deleteQuickLink = (keyword) => {
+export const deleteQuickLink = (shortcut) => {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get('quickLinks', (data) => {
       const quickLinks = data.quickLinks || {};
-      if (!quickLinks[keyword]) {
-        console.error(`Quick link for '${keyword}' not found.`);
+      if (!quickLinks[shortcut]) {
+        console.error(`Quick link for '${shortcut}' not found.`);
         resolve(false);
         return;
       }
-      delete quickLinks[keyword];
+      delete quickLinks[shortcut];
       chrome.storage.local.set({ quickLinks }, () => {
-        console.log(`Quick link for '${keyword}' deleted.`);
+        console.log(`Quick link for '${shortcut}' deleted.`);
         resolve(true);
       });
     });

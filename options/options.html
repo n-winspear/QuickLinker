@@ -14,7 +14,12 @@
     />
     <link rel="stylesheet" href="../styles/global.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
-    <link rel="stylesheet" href="options.css" />
+    <link rel="stylesheet" href="./options.css" />
+    <link rel="stylesheet" href="./styles/navbar.css" />
+    <link rel="stylesheet" href="./styles/layout.css" />
+    <link rel="stylesheet" href="./styles/quickLinks.css" />
+    <link rel="stylesheet" href="./styles/newQuickLink.css" />
+    <link rel="stylesheet" href="./styles/importQuickLinks.css" />
     <script type="module" src="options.js" defer></script>
   </head>
   <body class="roboto-regular">
@@ -33,21 +38,7 @@
         <div class="column-1">
           <div id="quick-links-container" class="content-block">
             <h3 class="space-mono-bold block-title">Quick Links</h3>
-            <ul class="quick-link-components">
-              <li class="quick-link-component">
-                <p class="shortcut">yt</p>
-                <p class="name">Youtube</p>
-                <div class="component-actions">
-                  <span class="material-symbols-outlined action-icon">
-                    visibility
-                  </span>
-                  <span class="material-symbols-outlined action-icon">
-                    edit
-                  </span>
-                  <span class="material-symbols-outlined"> delete </span>
-                </div>
-              </li>
-            </ul>
+            <ul id="quick-link-components"></ul>
             <div class="quick-links-actions">
               <button id="exportBtn" class="space-mono-bold">
                 Export Links
@@ -59,19 +50,13 @@
           <div id="new-quick-link-container" class="content-block">
             <h3 class="space-mono-bold block-title">New Quick Link</h3>
             <div class="new-link-inputs">
-              <input
-                type="text"
-                placeholder="Shortcut"
-                class="new-link-input"
-              />
-              <input type="text" placeholder="Link" class="new-link-input" />
-              <input
-                type="text"
-                placeholder="Name (optional)"
-                class="new-link-input"
-              />
+              <input id="shortcutInput" type="text" placeholder="Shortcut" />
+              <input id="linkInput" type="text" placeholder="Link" />
+              <input id="nameInput" type="text" placeholder="Name (optional)" />
               <div class="new-link-actions">
-                <button id="clearBtn" class="space-mono-bold">Clear</button>
+                <button id="clearBtn" class="space-mono-bold inverted">
+                  Clear
+                </button>
                 <button id="saveBtn" class="space-mono-bold">Save Link</button>
               </div>
             </div>
@@ -83,19 +68,17 @@
               <span class="material-symbols-outlined upload-icon">
                 upload
               </span>
-              <div class="upload-text" onclick="triggerFileUpload()">
+              <div class="upload-text">
                 <span>Drag & Drop to Upload</span>
                 <span id="orTxt" class="roboto-light">or</span>
               </div>
-              <button
-                id="browseBtn"
-                class="space-mono-bold"
-                onclick="triggerFileUpload()"
-              >
+              <button id="browseBtn" class="space-mono-bold inverted importBtn">
                 Browse
               </button>
             </div>
-            <button id="importBtn" class="space-mono-bold">Import Links</button>
+            <button id="importBtn" class="space-mono-bold importBtn">
+              Import Links
+            </button>
           </div>
         </div>
       </div>

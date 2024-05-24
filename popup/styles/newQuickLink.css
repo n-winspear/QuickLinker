@@ -1,0 +1,20 @@
+.new-link-inputs {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.new-link-inputs button {
+  padding: 10px 0px;
+  flex: 1 0 0;
+}
+
+.new-link-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}

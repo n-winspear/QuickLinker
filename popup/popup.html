@@ -13,23 +13,25 @@
     />
     <link rel="stylesheet" href="../styles/global.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="./styles/newQuickLink.css" />
     <link rel="stylesheet" href="popup.css" />
     <script type="module" src="popup.js" defer></script>
   </head>
   <body>
-    <div class="container">
-      <div class="titleContainer">
-        <h1>New Alias</h1>
+    <div id="new-quick-link-container" class="content-block">
+      <div class="popup-title-container">
+        <h3 class="space-mono-bold">New Quick Link</h3>
+        <span id="optionsBtn" class="material-symbols-outlined title-icon">
+          settings
+        </span>
       </div>
-      <div class="inputsContainer">
-        <input type="text" placeholder="Keyword" id="keyword" />
-        <input type="text" placeholder="URL" id="url" />
-        <span id="message"></span>
-        <div class="buttonsContainer">
-          <div id="optionsBtn" class="button" role="button">
-            <i class="material-icons" style="font-size: 20px">settings</i>
-          </div>
-          <div id="saveBtn" class="button" role="button">Save</div>
+      <div class="new-link-inputs">
+        <input id="shortcutInput" type="text" placeholder="Shortcut" />
+        <input id="linkInput" type="text" placeholder="Link" />
+        <input id="nameInput" type="text" placeholder="Name (optional)" />
+        <div class="new-link-actions">
+          <button id="clearBtn" class="space-mono-bold inverted">Clear</button>
+          <button id="saveBtn" class="space-mono-bold">Save Link</button>
         </div>
       </div>
     </div>

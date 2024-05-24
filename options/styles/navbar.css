@@ -1,0 +1,25 @@
+.nav-container {
+  margin: 0 auto;
+  max-width: var(--page-container-width);
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+nav {
+  height: 100px;
+  width: 100vw;
+  background-color: rgba(var(--theme-active-primary), 1);
+  box-shadow: 0px 1px 2px 0px rgba(var(--theme-active-boxshadow), 0.25);
+  /* X - Y - Blur - Spread - Colour */
+}
+
+#nav-logo {
+  height: 64px;
+}
+
+#nav-title {
+  margin-left: 16px;
+  color: var(--theme-active-text-dark);
+}
