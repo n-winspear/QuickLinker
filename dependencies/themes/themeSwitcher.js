@@ -36,9 +36,11 @@ export const updateThemeStyles = (
         } mode.`
       );
       const root = document.querySelector(':root');
-      const navLogo = document.getElementById('nav-logo');
-      const themeLogoSrc = `../images/logos/ql-${themeName}/ql-${themeName}_transparent_notext.png`;
-      navLogo.src = themeLogoSrc;
+      const navLogo = document.getElementById('nav-logo') || null;
+      if (navLogo) {
+        const themeLogoSrc = `../images/logos/ql-${themeName}/ql-${themeName}_transparent_notext.png`;
+        navLogo.src = themeLogoSrc;
+      }
       // Theme Property Names
       [
         'primary',
