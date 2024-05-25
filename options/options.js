@@ -13,6 +13,10 @@ import {
 import { debounce } from '../helpers/debounce.js';
 import { sortQuickLinks } from '../helpers/sortQuickLinks.js';
 import { getRootDomain } from '../helpers/getRootDomain.js';
+import {
+  setTheme,
+  updateThemeStyles,
+} from '../dependencies/themes/themeSwitcher.js';
 
 const QuickLink = (shortcut, link, name) => `
   <li class="quick-link-component" data-shortcut="${shortcut}">
@@ -176,7 +180,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Event listeners for QuickLink actions
+  // Event listeners for Theme Switcher
+  const themeSwitcher = document.querySelector('.theme-switcher');
+  const themeSwitcherIcon = themeSwitcher.querySelector(
+    '#theme-switcher-button'
+  );
+  const themeList = themeSwitcher.querySelector('.theme-list');
+  const themeListItems = themeSwitcher.querySelectorAll('.theme-list li');
+
+  themeSwitcherIcon.addEventListener('click', () => {
+    themeList.classList.toggle('theme-list-open');
+  });
+
+  themeListItems.forEach((item) => {
+    // This is where theme swtiching happens
+    item.addEventListener('click', async () => {
+      const themeName = item.getAttribute('data-theme-name');
+      await updateThemeStyles(themeName);
+      await setTheme(themeName);
+      themeList.classList.toggle('theme-list-open');
+      themeListItems.forEach((item) => {
+        item.classList.remove('active-theme');
+      });
+      item.classList.add('active-theme');
+    });
+  });
 
   // Event listeners for Export
   document

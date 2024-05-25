@@ -1,5 +1,6 @@
 :root {
-  /* Vermilion Theme */
+  /* Vermilion Theme (DEFAULT) */
+  /* Light Mode */
   --theme-vermilion-light-primary: 246, 243, 229;
   --theme-vermilion-light-secondary: 47, 19, 6;
   --theme-vermilion-light-tertiary: 216, 63, 3;
@@ -7,6 +8,27 @@
   --theme-vermilion-light-medium: 187, 187, 187;
   --theme-vermilion-light-light: 251, 247, 245;
   --theme-vermilion-light-boxshadow: 47, 19, 6;
+  --theme-vermilion-light-page: 251, 247, 245;
+
+  /* Electric */
+  --theme-electric-light-primary: 104, 117, 112;
+  --theme-electric-light-secondary: 17, 53, 96;
+  --theme-electric-light-tertiary: 251, 234, 136;
+  --theme-electric-light-dark: 251, 234, 136;
+  --theme-electric-light-medium: 187, 187, 187;
+  --theme-electric-light-light: 17, 53, 96;
+  --theme-electric-light-boxshadow: 17, 53, 96;
+  --theme-electric-light-page: 17, 53, 96; /*TO CHANGE */
+
+  /* Sage */
+  --theme-sage-light-primary: 240, 236, 222;
+  --theme-sage-light-secondary: 124, 140, 134;
+  --theme-sage-light-tertiary: 168, 189, 181;
+  --theme-sage-light-dark: 124, 140, 134;
+  --theme-sage-light-medium: 187, 187, 187;
+  --theme-sage-light-light: 251, 247, 245;
+  --theme-sage-light-boxshadow: 124, 140, 134;
+  --theme-sage-light-page: 251, 247, 245;
 
   /* Active Theme */
 
@@ -17,6 +39,7 @@
   --theme-active-medium: var(--theme-vermilion-light-medium);
   --theme-active-light: var(--theme-vermilion-light-light);
   --theme-active-boxshadow: var(--theme-vermilion-light-boxshadow);
+  --theme-active-page: var(--theme-vermilion-light-page);
 
   /* Page Container */
   --page-container-width: 1000px;
@@ -33,7 +56,7 @@ html {
 }
 
 body {
-  background-color: rgba(var(--theme-active-light), 1);
+  background-color: rgba(var(--theme-active-page), 1);
   color: rgba(var(--theme-active-dark), 1);
   height: 100%;
 }

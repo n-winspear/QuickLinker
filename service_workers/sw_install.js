@@ -8,6 +8,9 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
           yt: { link: 'https://youtube.com', name: 'Youtube' },
           gh: { link: 'https://github.com', name: 'Github' },
         },
+        theme: {
+          activeTheme: 'vermilion',
+        },
       },
       () => console.log('Default quickLinks object has been set.')
     );

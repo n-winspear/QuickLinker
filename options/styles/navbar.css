@@ -23,3 +23,59 @@ nav {
   margin-left: 16px;
   color: var(--theme-active-text-dark);
 }
+
+/* Theme Switcher */
+
+.theme-switcher {
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#theme-switcher-button {
+  font-size: 32px;
+}
+
+#theme-switcher-button:hover {
+  color: rgba(var(--theme-active-tertiary), 1);
+  cursor: pointer;
+}
+
+.theme-list {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: rgba(var(--theme-active-light), 1);
+  box-shadow: 0px 1px 2px 0px rgba(var(--theme-active-boxshadow), 0.25);
+  /* X - Y - Blur - Spread - Colour */
+  position: absolute;
+  top: 3em;
+  left: 50%;
+  width: 140px;
+  transform: translate(-50%);
+  opacity: 0;
+  display: none;
+  transition: 150ms;
+  z-index: 1;
+}
+
+.theme-list li {
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.theme-list li:hover {
+  background-color: rgba(var(--theme-active-tertiary), 0.1);
+}
+
+.active-theme {
+  color: rgba(var(--theme-active-tertiary), 1);
+}
+
+.theme-list-open {
+  display: block;
+  opacity: 1;
+}
