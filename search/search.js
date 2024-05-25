@@ -11,15 +11,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 const handleSearch = async (query) => {
   if (query) {
     const quickLinks = await getQuickLinks();
-    const keyword = query.trim();
-    if (quickLinks[keyword]) {
-      const url = quickLinks[keyword].url;
+    const shortcut = query.trim();
+    if (quickLinks[shortcut]) {
+      const url = quickLinks[shortcut].link;
       chrome.tabs.update(null, {
         url: url,
         active: false,
       });
     } else {
-      console.log(`No quick link found for keyword: ${keyword}`);
+      console.log(`No quick link found for shortcut: ${shortcut}`);
       const url = `https://www.google.com/search?q=${query}`;
       chrome.tabs.update(null, {
         url: url,

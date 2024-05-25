@@ -2,19 +2,15 @@ import { getQuickLinks } from '../dependencies/storage/quickLinkManager.js';
 
 // Suggest keywords based on input
 chrome.omnibox.onInputChanged.addListener(async (input, suggest) => {
-  await chrome.omnibox.setDefaultSuggestion({
-    description: 'Enter a keyword to find a quick link.',
-  });
-
   // const { quickLinks } = await chrome.storage.local.get('quickLinks');
   const quickLinks = await getQuickLinks();
 
   if (quickLinks) {
     const suggestions = Object.keys(quickLinks)
-      .filter((keyword) => keyword.includes(input))
-      .map((keyword) => ({
-        content: quickLinks[keyword].url,
-        description: `Open ${quickLinks[keyword].url}`,
+      .filter((shortcut) => shortcut.includes(input))
+      .map((shortcut) => ({
+        content: quickLinks[shortcut].link,
+        description: `Open ${quickLinks[shortcut].link}`,
       }));
 
     suggest(suggestions);

@@ -1,8 +1,11 @@
-import { getQuickLinks } from './quickLinkManager.js';
-
 export const exportQuickLinks = async () => {
   console.log('Exporting quickLinks...');
-  const quickLinks = await getQuickLinks();
+  const quickLinks = new Promise((resolve, reject) => {
+    chrome.storage.local.get('quickLinks', (data) => {
+      const quickLinks = data.quickLinks || {};
+      resolve(quickLinks);
+    });
+  });
   const jsonString = JSON.stringify(quickLinks, null, 2);
   const blob = new Blob([jsonString], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
