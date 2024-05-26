@@ -12,7 +12,7 @@ export const getRootDomain = (link) => {
         rootDomain = parts[0];
       } else {
         // Handle edge cases, return empty string
-        rootDomain = 'Could not identify.';
+        rootDomain = 'Could not identify URL';
       }
 
       if (rootDomain) {
@@ -22,7 +22,7 @@ export const getRootDomain = (link) => {
       resolve(rootDomain);
     } catch (error) {
       console.error(error);
-      reject(error);
+      resolve('Could not identify URL');
     }
   });
 };

@@ -133,6 +133,7 @@ const handleNewLinkSaveButtonClick = async () => {
 
     if (name === '' || name === undefined) {
       name = await getRootDomain(link);
+      console.log(name);
     }
 
     // TODO: FIX THE SHOW MESSGE FUNCTION
