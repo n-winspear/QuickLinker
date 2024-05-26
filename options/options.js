@@ -20,7 +20,7 @@ import {
 } from '../dependencies/themes/themeSwitcher.js';
 
 const QuickLink = (shortcut, link, name) => `
-  <li class="quick-link-component" data-shortcut="${shortcut}">
+  <li class="quick-link-component" data-shortcut="${shortcut}" >
     <div class="quick-link-summary">
       <p id="shortcut">${shortcut}</p>
       <p id="name">${name}</p>
@@ -31,7 +31,7 @@ const QuickLink = (shortcut, link, name) => `
         <span id="editBtn" class="material-symbols-outlined action-icon">
           edit
         </span>
-        <span id="deleteBtn" class="material-symbols-outlined action-icon">
+        <span id="deleteBtn" class="material-symbols-outlined action-icon" >
           delete
         </span>
       </div>
@@ -45,6 +45,7 @@ const QuickLink = (shortcut, link, name) => `
       <div class="quick-link-edit-actions">
         <button class="space-mono-bold editSaveBtn">Save</button>
       </div>
+      <span class="quick-link-edit-message"></span>
     </div>
   </li>
 `;
@@ -57,8 +58,7 @@ const addQuickLinkComponentEventListeners = () => {
         let viewLinkBtn = item.querySelector('#viewLinkBtn');
         let editBtn = item.querySelector('#editBtn');
         let deleteBtn = item.querySelector('#deleteBtn');
-
-        viewLinkBtn.addEventListener('click', () => {
+        let message = viewLinkBtn.addEventListener('click', () => {
           item
             .querySelector('.quick-link-details')
             .classList.toggle('show-details');
@@ -81,11 +81,21 @@ const addQuickLinkComponentEventListeners = () => {
         });
 
         deleteBtn.addEventListener('click', async () => {
+          const deleteConfirmed = item.hasAttribute('data-delete-confirmed');
+          if (!deleteConfirmed) {
+            item.setAttribute('data-delete-confirmed', true);
+            deleteBtn.innerHTML = 'check';
+            return;
+          }
+
           const success = await deleteQuickLink(shortcut);
           if (success) {
             item.remove();
           } else {
+            item.removeAttribute('data-delete-confirmed');
+            deleteBtn.innerHTML = 'delete';
             console.error(`Failed to remove quick link for '${keyword}'`);
+            showMessage(item, 'Failed to delete quick link', 'error');
           }
         });
       }
@@ -125,31 +135,33 @@ const handleNewLinkSaveButtonClick = async () => {
     const shortcut = document.getElementById('shortcutInput').value.trim();
     const link = document.getElementById('linkInput').value.trim();
     let name = document.getElementById('nameInput').value.trim();
+    const message = document.querySelector('.new-link-message');
 
     if (!shortcut || !link) {
-      showMessage('Shortcut and Link are required.', 'error');
+      showMessage(message, 'Shortcut and Link are required.', 'error');
       return;
     }
 
     if (name === '' || name === undefined) {
       name = await getRootDomain(link);
-      console.log(name);
     }
-
-    // TODO: FIX THE SHOW MESSGE FUNCTION
 
     const success = await addQuickLink(shortcut, link, name);
 
     if (success) {
       clearInputFields();
       displayQuickLinks();
-      showMessage('Quick link added successfully.', 'success');
+      showMessage(message, 'Quick link added successfully.', 'success');
     } else {
-      showMessage('Shortcut already exists.', 'error');
+      showMessage(message, 'Shortcut already exists.', 'error');
     }
   } catch (error) {
     console.error(error);
-    showMessage('An error occurred while adding the quick link.', 'error');
+    showMessage(
+      message,
+      'An error occurred while adding the quick link.',
+      'error'
+    );
   }
 };
 
@@ -159,29 +171,34 @@ const handleEditLinkSaveButtonClick = async (element) => {
     const shortcut = element.querySelector('#shortcut').innerHTML.trim();
     const link = element.querySelector('.editLinkInput').value.trim();
     let name = element.querySelector('.editNameInput').value.trim();
+    const message = element.querySelector('.quick-link-edit-message');
+    const editSaveBtn = element.querySelector('.editSaveBtn');
 
     if (!link) {
-      showMessage('Link is required.', 'error');
+      showMessage(message, 'Link is required.', 'error');
       return;
     }
+
+    editSaveBtn.disabled = true;
 
     if (name === '' || name === undefined) {
       name = await getRootDomain(link);
     }
 
-    // TODO: FIX THE SHOW MESSGE FUNCTION
-
     const success = await editQuickLink(shortcut, link, name);
 
     if (success) {
-      displayQuickLinks();
-      showMessage('Quick link added successfully.', 'success');
+      showMessage(message, 'Quick link edited successfully.', 'success');
+      setTimeout(() => {
+        displayQuickLinks();
+        editSaveBtn.disabled = false;
+      }, 1500);
     } else {
-      showMessage('Shortcut already exists.', 'error');
+      showMessage(message, 'Failed to edit quick link.', 'error');
     }
   } catch (error) {
     console.error(error);
-    showMessage('An error occurred while adding the quick link.', 'error');
+    showMessage('An error occurred while editing the quick link.', 'error');
   }
 };
 
@@ -202,15 +219,13 @@ const clearInputFields = () => {
   document.getElementById('nameInput').value = '';
 };
 
-const showMessage = (message, type) => {
-  const messageElement = document.getElementById('message');
-  messageElement.textContent = message;
-  messageElement.className = '';
-  messageElement.classList.add(type);
-  messageElement.style.display = 'flex';
-
+const showMessage = (element, message, type) => {
+  element.textContent = message;
+  element.classList.add(type);
+  element.style.display = 'flex';
   setTimeout(() => {
-    messageElement.style.display = 'none';
+    element.classList.remove(type);
+    element.style.display = 'none';
   }, 5000);
 };
 

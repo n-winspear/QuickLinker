@@ -10,25 +10,29 @@ const handleSaveButtonClick = async () => {
     const shortcut = document.getElementById('shortcutInput').value.trim();
     const link = document.getElementById('linkInput').value.trim();
     const name = document.getElementById('nameInput').value.trim();
+    const message = document.querySelector('.new-link-message');
 
     if (!shortcut || !link) {
-      showMessage('Shortcut and Link are required.', 'error');
+      showMessage(message, 'Shortcut and Link are required.', 'error');
       return;
     }
-
-    // TODO: FIX THE SHOW MESSGE FUNCTION
 
     const success = await addQuickLink(shortcut, link, name);
 
     if (success) {
       clearInputFields();
-      showMessage('Quick link added successfully.', 'success');
+      showMessage(message, 'Quick link added successfully.', 'success');
+      setTimeout(() => window.close(), 2000);
     } else {
-      showMessage('Shortcut already exists.', 'error');
+      showMessage(message, 'Shortcut already exists.', 'error');
     }
   } catch (error) {
     console.error(error);
-    showMessage('An error occurred while adding the quick link.', 'error');
+    showMessage(
+      message,
+      'An error occurred while adding the quick link.',
+      'error'
+    );
   }
 };
 
@@ -45,15 +49,13 @@ const clearInputFields = () => {
   document.getElementById('nameInput').value = '';
 };
 
-const showMessage = (message, type) => {
-  const messageElement = document.getElementById('message');
-  messageElement.textContent = message;
-  messageElement.className = '';
-  messageElement.classList.add(type);
-  messageElement.style.display = 'flex';
-
+const showMessage = (element, message, type) => {
+  element.textContent = message;
+  element.classList.add(type);
+  element.style.display = 'flex';
   setTimeout(() => {
-    messageElement.style.display = 'none';
+    element.classList.remove(type);
+    element.style.display = 'none';
   }, 5000);
 };
 

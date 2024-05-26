@@ -1,6 +1,6 @@
 export const exportQuickLinks = async () => {
   console.log('Exporting quickLinks...');
-  const quickLinks = new Promise((resolve, reject) => {
+  const quickLinks = await new Promise((resolve, reject) => {
     chrome.storage.local.get('quickLinks', (data) => {
       const quickLinks = data.quickLinks || {};
       resolve(quickLinks);

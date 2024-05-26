@@ -73,6 +73,12 @@
 
   /* Page Container */
   --page-container-width: 1000px;
+
+  /* Data States */
+  --success-background: 212, 237, 218;
+  --success-border: 195, 230, 203;
+  --error-background: 248, 215, 218;
+  --error-border: 245, 198, 203;
 }
 
 * {
@@ -105,13 +111,19 @@ button:hover {
 
 button.inverted {
   background-color: rgba(var(--theme-active-light), 1);
-  color: rgba(var(--theme-active-tertiary));
+  color: rgba(var(--theme-active-tertiary), 1);
   border: solid 1px rgba(var(--theme-active-tertiary), 1);
 }
 
 button.inverted:hover {
   background-color: rgba(var(--theme-active-tertiary), 1);
-  color: rgba(var(--theme-active-light));
+  color: rgba(var(--theme-active-light), 1);
+}
+
+button:disabled {
+  background-color: rgba(var(--theme-active-medium), 1);
+  color: rgba(var(--theme-active-dark), 1);
+  border: solid 1px rgba(var(--theme-active-medium), 1);
 }
 
 input[type='text'] {
