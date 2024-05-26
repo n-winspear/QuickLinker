@@ -85,6 +85,10 @@ const addQuickLinkComponentEventListeners = () => {
           if (!deleteConfirmed) {
             item.setAttribute('data-delete-confirmed', true);
             deleteBtn.innerHTML = 'check';
+            setTimeout(() => {
+              item.removeAttribute('data-delete-confirmed');
+              deleteBtn.innerHTML = 'delete';
+            }, 3000);
             return;
           }
 
