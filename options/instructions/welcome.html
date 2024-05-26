@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quick Linker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="../../styles/global.css" />
+    <link rel="stylesheet" href="../../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/navbar.css" />
+    <link rel="stylesheet" href="./instructions.css" />
+    <link rel="stylesheet" href="../options.css" />
+    <script type="module" src="../../dependencies/themes/loadTheme.js"></script>
+    <script type="module" src="./instructions.js" defer></script>
+  </head>
+  <body class="roboto-regular">
+    <nav>
+      <div class="nav-container">
+        <img
+          id="nav-logo"
+          src="../../images/logos/ql-vermilion/ql-vermilion_transparent_notext.png"
+          alt="Quick Linker Logo"
+        />
+        <h2 id="nav-title" class="space-mono-bold">Quick Linker</h2>
+        <div class="theme-switcher">
+          <span id="theme-switcher-button" class="material-symbols-rounded"
+            >palette</span
+          >
+          <ul class="theme-list space-mono-regular">
+            <li
+              class="theme-list-item active-theme"
+              data-theme-name="vermilion"
+            >
+              Vermilion
+            </li>
+            <li class="theme-list-item" data-theme-name="honey">Honey</li>
+            <li class="theme-list-item" data-theme-name="mint">Mint</li>
+            <li class="theme-list-item" data-theme-name="mono">Mono</li>
+            <li class="theme-list-item" data-theme-name="rose">Rose</li>
+            <li class="theme-list-item" data-theme-name="sage">Sage</li>
+          </ul>
+        </div>
+        <div class="home">
+          <span id="home-button" class="material-symbols-rounded">home</span>
+        </div>
+      </div>
+    </nav>
+    <div class="content-container">
+      <div class="content-block">
+        <h2>Welcome!</h2>
+        <h3>Thank you for downloading Quick Linker</h3>
+        <p>
+          This page is a quick rundown on how this tool works and how to setup
+          site search if your browser doesn't use the traditional chrome omnibox
+          API (like Arc browser)
+        </p>
+        <p>
+          If your browser does support the chrome omnibox API you're already set
+          to go! Just add your first quick link or use one of our example ones
+          that's already setup by entering 'gl' (goto link) into the URL bar hit
+          tab (or space) to activate the extension and enter the shortcute (e.g.
+          'yt') and push enter to go.
+        </p>
+        <p>
+          If you're like me and using a browser that doesn't support the chrome
+          omnibox API (a.k.a Arc) then you'll need to do a bit of setup for this
+          to work. Start by opening your browser settings and find the 'Site
+          Search' setting (usually where search engines are managed). Create a
+          new 'Site Search', give it a friendly name (e.g. Quick Linker), choose
+          a shortcut (unfortunately you cannot use the default 'gl', I have
+          opted to us 'fl' as it's next door.) then in the URL search query
+          enter
+          <code
+            >chrome-extension://anmgdgipllkbgkmlkajkidadhpjaanam/search/search.html?q=%s</code
+          >
+          where <code>anmgdgipllkbgkmlkajkidadhpjaanam</code> is the chrome
+          extension ID. If the ID has changed for some reason see this guide to
+          find the current extension ID.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

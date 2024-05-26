@@ -25,13 +25,13 @@ const QuickLink = (shortcut, link, name) => `
       <p id="shortcut">${shortcut}</p>
       <p id="name">${name}</p>
       <div class="component-actions">
-        <span id="viewLinkBtn" class="material-symbols-outlined action-icon" data-link-action-popup-btn>
+        <span id="viewLinkBtn" class="material-symbols-rounded action-icon" data-link-action-popup-btn>
           visibility
         </span>
-        <span id="editBtn" class="material-symbols-outlined action-icon">
+        <span id="editBtn" class="material-symbols-rounded action-icon">
           edit
         </span>
-        <span id="deleteBtn" class="material-symbols-outlined action-icon" >
+        <span id="deleteBtn" class="material-symbols-rounded action-icon" >
           delete
         </span>
       </div>
@@ -283,6 +283,15 @@ document.addEventListener('DOMContentLoaded', () => {
         item.classList.remove('active-theme');
       });
       item.classList.add('active-theme');
+    });
+  });
+
+  // Event listeners for Instructions
+  const instructionsBtn = document.getElementById('instructions-button');
+  instructionsBtn.addEventListener('click', () => {
+    chrome.tabs.update(null, {
+      url: '/options/instructions/welcome.html',
+      active: true,
     });
   });
 

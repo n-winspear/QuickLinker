@@ -79,3 +79,35 @@ nav {
   display: block;
   opacity: 1;
 }
+
+.instructions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+}
+
+#instructions-button {
+  font-size: 32px;
+}
+
+#instructions-button:hover {
+  color: rgba(var(--theme-active-tertiary), 1);
+  cursor: pointer;
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+}
+
+#home-button {
+  font-size: 34px;
+}
+
+#home-button:hover {
+  color: rgba(var(--theme-active-tertiary), 1);
+  cursor: pointer;
+}

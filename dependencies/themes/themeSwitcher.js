@@ -38,7 +38,20 @@ export const updateThemeStyles = (
       const root = document.querySelector(':root');
       const navLogo = document.getElementById('nav-logo') || null;
       if (navLogo) {
-        const themeLogoSrc = `../images/logos/ql-${themeName}/ql-${themeName}_transparent_notext.png`;
+        const pageName = getCurrentPageName();
+        let themeLogoSrc;
+        switch (pageName) {
+          case 'options':
+            themeLogoSrc = `../images/logos/ql-${themeName}/ql-${themeName}_transparent_notext.png`;
+            break;
+
+          case 'welcome':
+            themeLogoSrc = `../../images/logos/ql-${themeName}/ql-${themeName}_transparent_notext.png`;
+            break;
+
+          default:
+            themeLogoSrc = `../images/logos/ql-${themeName}/ql-${themeName}_transparent_notext.png`;
+        }
         navLogo.src = themeLogoSrc;
       }
       // Theme Property Names
@@ -66,4 +79,17 @@ export const updateThemeStyles = (
       reject(error);
     }
   });
+};
+
+const getCurrentPageName = () => {
+  const pathname = window.location.pathname;
+  let pageName = pathname.substring(pathname.lastIndexOf('/') + 1);
+
+  // Remove query strings and hash fragments if they exist
+  pageName = pageName.split('?')[0].split('#')[0];
+
+  // Remove the file extension
+  pageName = pageName.split('.')[0];
+
+  return pageName;
 };
