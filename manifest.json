@@ -4,9 +4,13 @@
   "version": "2.2.0",
   "description": "Quickly navigate to regularly accessed websites using keyword shortcuts.",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/rounded/icon16.png",
+    "32": "icons/rounded/icon32.png",
+    "48": "icons/rounded/icon48.png",
+    "64": "icons/rounded/icon64.png",
+    "128": "icons/rounded/icon128.png",
+    "256": "icons/rounded/icon256.png",
+    "512": "icons/rounded/icon512.png"
   },
   "background": {
     "service_worker": "service_worker.js",
@@ -21,9 +25,13 @@
   "action": {
     "default_popup": "popup/popup.html",
     "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
+      "16": "icons/rounded/icon16.png",
+      "32": "icons/rounded/icon32.png",
+      "48": "icons/rounded/icon48.png",
+      "64": "icons/rounded/icon64.png",
+      "128": "icons/rounded/icon128.png",
+      "256": "icons/rounded/icon256.png",
+      "512": "icons/rounded/icon512.png"
     }
   },
   "content_scripts": [
