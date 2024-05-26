@@ -2,6 +2,7 @@ import {
   addQuickLink,
   getQuickLinks,
   deleteQuickLink,
+  editQuickLink,
 } from '../dependencies/storage/quickLinkManager.js';
 
 import {
@@ -36,6 +37,15 @@ const QuickLink = (shortcut, link, name) => `
       </div>
     </div>
     <div class="quick-link-details"><p><i>${link}</i></p></div>
+    <div class="quick-link-edit">
+      <div class="quick-link-edit-inputs">
+        <input class="editNameInput" type="text" placeholder="Name (optional)" value="${name}"/>
+        <input class="editLinkInput" type="text" placeholder="Shortcut" value="${link}"/>
+      </div>
+      <div class="quick-link-edit-actions">
+        <button class="space-mono-bold editSaveBtn">Save</button>
+      </div>
+    </div>
   </li>
 `;
 
@@ -52,6 +62,22 @@ const addQuickLinkComponentEventListeners = () => {
           item
             .querySelector('.quick-link-details')
             .classList.toggle('show-details');
+        });
+
+        editBtn.addEventListener('click', () => {
+          item.querySelector('.quick-link-edit').classList.toggle('show-edit');
+          item.querySelector('.editSaveBtn').addEventListener(
+            'click',
+            debounce(() => handleEditLinkSaveButtonClick(item), 300)
+          );
+
+          item
+            .querySelectorAll('.editLinkInput, .editNameInput')
+            .forEach((element) =>
+              element.addEventListener('keydown', (e) =>
+                handleEnterKey(e, item)
+              )
+            );
         });
 
         deleteBtn.addEventListener('click', async () => {
@@ -94,13 +120,11 @@ const displayQuickLinks = async () => {
 };
 
 // New Quick Link
-const handleSaveButtonClick = async () => {
+const handleNewLinkSaveButtonClick = async () => {
   try {
     const shortcut = document.getElementById('shortcutInput').value.trim();
     const link = document.getElementById('linkInput').value.trim();
     let name = document.getElementById('nameInput').value.trim();
-
-    console.log('here', typeof name);
 
     if (!shortcut || !link) {
       showMessage('Shortcut and Link are required.', 'error');
@@ -128,10 +152,46 @@ const handleSaveButtonClick = async () => {
   }
 };
 
-const handleEnterKey = (event) => {
+// Edit Quick Link
+const handleEditLinkSaveButtonClick = async (element) => {
+  try {
+    const shortcut = element.querySelector('#shortcut').innerHTML.trim();
+    const link = element.querySelector('.editLinkInput').value.trim();
+    let name = element.querySelector('.editNameInput').value.trim();
+
+    if (!link) {
+      showMessage('Link is required.', 'error');
+      return;
+    }
+
+    if (name === '' || name === undefined) {
+      name = await getRootDomain(link);
+    }
+
+    // TODO: FIX THE SHOW MESSGE FUNCTION
+
+    const success = await editQuickLink(shortcut, link, name);
+
+    if (success) {
+      displayQuickLinks();
+      showMessage('Quick link added successfully.', 'success');
+    } else {
+      showMessage('Shortcut already exists.', 'error');
+    }
+  } catch (error) {
+    console.error(error);
+    showMessage('An error occurred while adding the quick link.', 'error');
+  }
+};
+
+const handleEnterKey = (event, item = null) => {
   if (event.key === 'Enter') {
     event.preventDefault();
-    handleSaveButtonClick();
+    if (item !== null) {
+      handleEditLinkSaveButtonClick(item);
+    } else {
+      handleNewLinkSaveButtonClick();
+    }
   }
 };
 
@@ -217,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .addEventListener('click', clearInputFields);
   document
     .getElementById('saveBtn')
-    .addEventListener('click', debounce(handleSaveButtonClick, 300));
+    .addEventListener('click', debounce(handleNewLinkSaveButtonClick, 300));
   document
     .querySelectorAll('#shortcutInput, #linkInput, #nameInput')
     .forEach((element) => element.addEventListener('keydown', handleEnterKey));

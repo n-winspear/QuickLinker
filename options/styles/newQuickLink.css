@@ -12,6 +12,10 @@
   flex: 1 0 0;
 }
 
+.new-link-inputs input {
+  width: 100%;
+}
+
 .new-link-actions {
   display: flex;
   justify-content: space-between;

@@ -86,3 +86,47 @@
 #exportBtn {
   padding: 10px 24px;
 }
+
+.quick-link-edit {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  transition: all 150ms ease-in-out;
+  padding: 16px 8px 8px 0px;
+}
+
+.quick-link-edit.show-edit {
+  display: flex;
+}
+
+.quick-link-edit-inputs {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.editNameInput {
+  width: 30%;
+  margin-right: 4px;
+}
+
+.editLinkInput {
+  width: 70%;
+  margin-left: 4px;
+}
+
+.quick-link-edit-actions {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.quick-link-edit-actions button {
+  padding: 4px 16px;
+  margin-right: 8px;
+}
