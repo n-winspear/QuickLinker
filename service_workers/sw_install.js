@@ -11,8 +11,11 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
         theme: {
           activeTheme: 'vermilion',
         },
+        showWelcome: true,
       },
       () => console.log('Default quickLinks object has been set.')
     );
+
+    chrome.runtime.openOptionsPage();
   }
 });

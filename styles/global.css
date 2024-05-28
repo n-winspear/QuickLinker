@@ -94,7 +94,7 @@ html {
 body {
   background-color: rgba(var(--theme-active-page), 1);
   color: rgba(var(--theme-active-dark), 1);
-  height: 100%;
+  min-height: 100vh;
 }
 
 button {

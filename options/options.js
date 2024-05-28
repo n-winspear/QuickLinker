@@ -19,6 +19,17 @@ import {
   updateThemeStyles,
 } from '../dependencies/themes/themeSwitcher.js';
 
+chrome.storage.local.get('showWelcome', (data) => {
+  const showWelcome = data.showWelcome || false;
+  if (showWelcome) {
+    chrome.storage.local.set({ showWelcome: false });
+    chrome.tabs.update(null, {
+      url: '/options/instructions/welcome.html',
+      active: true,
+    });
+  }
+});
+
 const QuickLink = (shortcut, link, name) => `
   <li class="quick-link-component" data-shortcut="${shortcut}" >
     <div class="quick-link-summary">

@@ -9,3 +9,10 @@
   color: #155724;
   border: 1px solid rgba(var(--success-border), 1);
 }
+
+.buy-coffee {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

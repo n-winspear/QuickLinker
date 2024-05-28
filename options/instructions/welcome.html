@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="../../styles/global.css" />
     <link rel="stylesheet" href="../../styles/fonts.css" />
     <link rel="stylesheet" href="../styles/navbar.css" />
-    <link rel="stylesheet" href="./instructions.css" />
     <link rel="stylesheet" href="../options.css" />
+    <link rel="stylesheet" href="./instructions.css" />
     <script type="module" src="../../dependencies/themes/loadTheme.js"></script>
     <script type="module" src="./instructions.js" defer></script>
   </head>
@@ -57,36 +57,95 @@
     </nav>
     <div class="content-container">
       <div class="content-block">
-        <h2>Welcome!</h2>
-        <h3>Thank you for downloading Quick Linker</h3>
+        <h2 class="space-mono-bold">Hello!</h2>
+        <h3 class="space-mono-bold">
+          Thank you for installing Quick Linker :)
+        </h3>
+
+        <div class="quick-linker-how">
+          <div class="quick-linker-how-text">
+            <h4 class="space-mono-bold">How Quick Linker works</h4>
+            <p>
+              The basic functionality of Quick Linker is simple, it creates a
+              shortcut and maps it to a common URL you visit so that you can
+              navigate around quickly and efficiently without clicking through
+              folders upon folders of favourites. I myself use it to switch
+              between the myriad admin panels in my job.
+            </p>
+            <h4 class="space-mono-bold">How to use Quick Linker</h4>
+            <p>
+              If your browser supports the chrome omnibox API (which is most
+              browsers) then you're already set to go! Just add your first quick
+              link or use one of our example ones that's already setup. Enter
+              'gl' (goto link) into the URL bar hit tab (or space) to activate
+              the extension and enter the shortcute (e.g. 'yt') and push enter
+              to go.
+            </p>
+          </div>
+          <div class="quick-linker-how-img">
+            <img
+              src="../../images/instructions/welcome/new-quick-link.png"
+              alt="New Quick Link popup"
+              id="ql-how-new-link"
+            />
+          </div>
+        </div>
+
+        <h4 class="space-mono-bold">
+          How to setup Quick Linker in Arc (and others)
+        </h4>
         <p>
-          This page is a quick rundown on how this tool works and how to setup
-          site search if your browser doesn't use the traditional chrome omnibox
-          API (like Arc browser)
+          If you're using a browser that doesn't use the chrome omnibox API
+          (i.e. Arc Browser) then you'll need to setup a Site Search shortcut
+          first.
         </p>
+        <ol>
+          <li>
+            1 - Start by opening your browser settings and find the 'Site
+            Search' setting (usually where search engines are managed).
+          </li>
+          <li>
+            2 - Create a new 'Site Search' and give it a friendly name (e.g.
+            Quick Linker)
+          </li>
+          <li>
+            3 - Choose a shortcut to activate the site search (unfortunately you
+            cannot use the default 'gl'. I use 'fl' as it's next door.)
+          </li>
+          <li>
+            4 - In the URL search query enter
+            <span class="inline-code"
+              >chrome-extension://anmgdgipllkbgkmlkajkidadhpjaanam/search/search.html?q=%s</span
+            >
+            where
+            <span class="inline-code">anmgdgipllkbgkmlkajkidadhpjaanam</span> is
+            the chrome extension ID. If the ID has changed for some reason you
+            can find it in the URL bar of this page.
+          </li>
+        </ol>
+        <h4 class="space-mono-bold">How Quick Linker came to be</h4>
         <p>
-          If your browser does support the chrome omnibox API you're already set
-          to go! Just add your first quick link or use one of our example ones
-          that's already setup by entering 'gl' (goto link) into the URL bar hit
-          tab (or space) to activate the extension and enter the shortcute (e.g.
-          'yt') and push enter to go.
+          I built V1 of this tool for my own benefit, however since trying out
+          Arc browser I realised it doesn't work with Arc's command bar. I
+          looked back at the original code for a way to make it work with Arc
+          when I realised there were some big things that needed to be fixed and
+          so I rebuilt it (almost) from scratch with a new design and some much
+          needed features (including Arc support).
         </p>
+        <h4 class="space-mono-bold">Support Quick Linker</h4>
         <p>
-          If you're like me and using a browser that doesn't support the chrome
-          omnibox API (a.k.a Arc) then you'll need to do a bit of setup for this
-          to work. Start by opening your browser settings and find the 'Site
-          Search' setting (usually where search engines are managed). Create a
-          new 'Site Search', give it a friendly name (e.g. Quick Linker), choose
-          a shortcut (unfortunately you cannot use the default 'gl', I have
-          opted to us 'fl' as it's next door.) then in the URL search query
-          enter
-          <code
-            >chrome-extension://anmgdgipllkbgkmlkajkidadhpjaanam/search/search.html?q=%s</code
-          >
-          where <code>anmgdgipllkbgkmlkajkidadhpjaanam</code> is the chrome
-          extension ID. If the ID has changed for some reason see this guide to
-          find the current extension ID.
+          If you like the tool, firstly I'm glad to hear it! Secondly, if you
+          would like to support the maintenance of this tool feel free to send
+          me a cup of coffee &#9749;
         </p>
+        <div class="buy-coffee">
+          <a href="https://buymeacoffee.com/quicklinker" target="_blank"
+            ><img
+              src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+              alt="Buy Me A Coffee"
+              style="height: 42px !important; width: 152px !important"
+          /></a>
+        </div>
       </div>
     </div>
   </body>
